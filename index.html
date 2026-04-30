@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Guide Odoo - Purchase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              page: "#090f1c",
+              panel: "#111827",
+              panelSoft: "#0f172a",
+              line: "#263244",
+              muted: "#94a3b8",
+              brand: "#2dd4bf",
+              ocean: "#60a5fa",
+            },
+            boxShadow: {
+              soft: "0 18px 45px rgba(0, 0, 0, 0.28)",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen bg-page text-slate-100">
+    <header class="border-b border-line bg-panel">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-5 lg:px-6">
+        <div class="min-w-0">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">Odoo Purchase</p>
+          <h1 class="mt-0.5 truncate text-xl font-bold tracking-tight sm:text-2xl">User Guide Odoo - Purchase</h1>
+        </div>
+        <div class="hidden items-center gap-2 text-xs text-slate-300 sm:flex">
+          <span class="rounded-md border border-line bg-panelSoft px-2.5 py-1 font-medium">15 PDF</span>
+          <span class="rounded-md border border-line bg-panelSoft px-2.5 py-1 font-medium">HTML</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto grid max-w-7xl gap-4 px-4 py-4 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-start lg:gap-6 lg:px-6">
+      <!-- Sidebar (Categories, Search, and Guide List) -->
+      <div
+        class="min-w-0 flex flex-col gap-4 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto lg:overflow-x-hidden [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-line hover:[&::-webkit-scrollbar-thumb]:bg-slate-600"
+      >
+        <aside class="space-y-3">
+          <section class="rounded-xl border border-line bg-panel p-3 shadow-soft lg:p-4">
+            <label for="categoryFilter" class="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                />
+              </svg>
+              Filter Kategori
+            </label>
+            <div class="relative">
+              <select
+                id="categoryFilter"
+                class="w-full appearance-none rounded-lg border border-line bg-panelSoft pl-3 pr-8 py-2.5 text-sm text-slate-100 outline-none transition focus:border-brand focus:ring-1 focus:ring-brand cursor-pointer"
+              >
+                <option value="all">Semua Kategori</option>
+                <!-- Options populated by JS -->
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </div>
+            </div>
+          </section>
+
+          <section class="rounded-xl border border-line bg-panel p-3 shadow-soft lg:p-4">
+            <label for="guideSearch" class="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Cari Guide
+            </label>
+            <div class="relative">
+              <input
+                id="guideSearch"
+                type="search"
+                placeholder="PR, RFQ, PO, Receive..."
+                class="w-full rounded-lg border border-line bg-panelSoft pl-3 pr-3 py-2.5 text-sm text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-brand focus:ring-1 focus:ring-brand"
+              />
+            </div>
+          </section>
+        </aside>
+
+        <!-- Guide List Grouped in Sidebar -->
+        <section id="guideList" class="min-w-0 space-y-3 pb-4 lg:pb-8"></section>
+      </div>
+
+      <!-- Main Content (PDF Viewer) -->
+      <section class="order-first min-w-0 flex flex-col space-y-3 lg:order-none">
+        <section class="overflow-hidden rounded-xl border border-line bg-panel shadow-soft flex flex-col">
+          <div class="flex flex-col gap-3 border-b border-line bg-panel p-3 sm:flex-row sm:items-center sm:justify-between lg:p-4">
+            <div class="min-w-0 flex items-center gap-3">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-teal-400/10 text-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Preview Dokumen</p>
+                <h2 id="currentTitle" class="mt-0.5 truncate text-base font-bold text-slate-100 sm:text-lg">How to Create a Purchase Request</h2>
+              </div>
+            </div>
+            <a
+              id="openCurrentPdf"
+              href="How%20to%20Create%20a%20Purchase%20Request.pdf"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-bold text-slate-900 transition hover:bg-teal-300 focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-panel"
+            >
+              <span>Buka di Tab Baru</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+          <div class="h-[60vh] min-h-[400px] w-full bg-slate-950 sm:h-[70vh] lg:h-[calc(100vh-8.5rem)] lg:min-h-[700px]">
+            <iframe id="pdfViewer" title="PDF Preview" src="How%20to%20Create%20a%20Purchase%20Request.pdf" class="h-full w-full border-none"></iframe>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const categories = [
+        {
+          id: "purchase-request",
+          name: "Purchase Request",
+          description: "Create, edit, withdraw, status, approval.",
+          guides: ["How to Create a Purchase Request.pdf", "How to Edit a Draft PR.pdf", "How to Withdraw PR.pdf", "How to Check PR Status & Approval Progress.pdf", "How to Approve PR.pdf"],
+        },
+        {
+          id: "rfq-vendor",
+          name: "RFQ & Vendor",
+          description: "RFQ dan compare vendor.",
+          guides: ["How to Create RFQ.pdf", "How to Compare Vendors.pdf"],
+        },
+        {
+          id: "purchase-order",
+          name: "Purchase Order",
+          description: "Create, approve, import PO.",
+          guides: ["How to create PO from RFQ.pdf", "How to Approve PO.pdf", "How to PO Import.pdf"],
+        },
+        {
+          id: "receiving",
+          name: "Receiving",
+          description: "Receive lokal dan import.",
+          guides: ["How to Receive Products.pdf", "How to Local Receive.pdf", "How to Receive Import.pdf"],
+        },
+        {
+          id: "billing-cost",
+          name: "Billing & Cost",
+          description: "Vendor bill dan landed cost.",
+          guides: ["How to Upload Vendor Bill.pdf", "How to Fill Landed Cost.pdf"],
+        },
+      ];
+
+      const categoryFilter = document.getElementById("categoryFilter");
+      const guideList = document.getElementById("guideList");
+      const guideSearch = document.getElementById("guideSearch");
+      const pdfViewer = document.getElementById("pdfViewer");
+      const currentTitle = document.getElementById("currentTitle");
+      const openCurrentPdf = document.getElementById("openCurrentPdf");
+
+      let activeCategory = "all";
+      let activeGuide = categories[0].guides[0];
+
+      function guideTitle(fileName) {
+        return fileName.replace(/\.pdf$/i, "");
+      }
+
+      function pdfPath(fileName) {
+        return encodeURI(fileName);
+      }
+
+      function setActiveGuide(fileName) {
+        activeGuide = fileName;
+        const path = pdfPath(fileName);
+        pdfViewer.src = path;
+        openCurrentPdf.href = path;
+        currentTitle.textContent = guideTitle(fileName);
+        renderGuides();
+      }
+
+      function setActiveCategory(categoryId) {
+        activeCategory = categoryId;
+        renderCategories();
+        renderGuides();
+        if (window.innerWidth >= 1024) {
+          guideList.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+
+      function renderCategories() {
+        categoryFilter.innerHTML =
+          `<option value="all">Semua Kategori</option>` +
+          categories
+            .map((category) => {
+              const isSelected = activeCategory === category.id ? "selected" : "";
+              return `<option value="${category.id}" ${isSelected}>${category.name}</option>`;
+            })
+            .join("");
+      }
+
+      function renderGuides() {
+        const query = guideSearch.value.trim().toLowerCase();
+        const visibleCategories = categories
+          .filter((category) => activeCategory === "all" || category.id === activeCategory)
+          .map((category) => ({
+            ...category,
+            guides: category.guides.filter((guide) => guideTitle(guide).toLowerCase().includes(query)),
+          }))
+          .filter((category) => category.guides.length > 0);
+
+        if (visibleCategories.length === 0) {
+          guideList.innerHTML = `
+            <section class="min-w-0 rounded-lg border border-line bg-panel p-2.5 text-sm text-slate-400 shadow-soft lg:p-3">
+              Tidak ada guide yang cocok.
+            </section>
+          `;
+          return;
+        }
+
+        guideList.innerHTML = visibleCategories
+          .map(
+            (category) => `
+            <section class="min-w-0 overflow-hidden rounded-lg border border-line bg-panel p-2.5 shadow-soft lg:p-3" id="${category.id}">
+              <div class="mb-2 flex items-center justify-between gap-3">
+                <h3 class="min-w-0 truncate text-xs font-bold uppercase tracking-[0.12em] text-slate-400 lg:text-sm lg:normal-case lg:tracking-normal lg:text-slate-100">${category.name}</h3>
+                <span class="rounded-md bg-panelSoft px-2 py-0.5 text-[11px] font-bold text-slate-400">${category.guides.length}</span>
+              </div>
+              <div class="grid gap-1.5">
+                ${category.guides
+                  .map((guide) => {
+                    const isActive = activeGuide === guide;
+                    return `
+                    <article class="min-w-0 overflow-hidden rounded-md border ${isActive ? "border-brand/70 bg-teal-400/10" : "border-line bg-panelSoft"} px-2.5 py-2 transition hover:border-brand/70">
+                      <div class="min-w-0 flex items-start justify-between gap-2">
+                        <button
+                          type="button"
+                          class="block min-w-0 flex-1 text-left"
+                          data-guide="${guide}"
+                        >
+                          <span class="block truncate text-sm font-semibold ${isActive ? "text-brand" : "text-slate-200"}">${guideTitle(guide)}</span>
+                        </button>
+                        <a
+                          href="${pdfPath(guide)}"
+                          target="_blank"
+                          rel="noopener"
+                          class="shrink-0 text-[11px] font-bold text-ocean hover:text-blue-300"
+                        >
+                          Open
+                        </a>
+                      </div>
+                    </article>
+                  `;
+                  })
+                  .join("")}
+              </div>
+            </section>
+          `,
+          )
+          .join("");
+      }
+
+      categoryFilter.addEventListener("change", (event) => {
+        setActiveCategory(event.target.value);
+      });
+
+      guideList.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-guide]");
+        if (!button) return;
+        setActiveGuide(button.dataset.guide);
+      });
+
+      guideSearch.addEventListener("input", renderGuides);
+
+      renderCategories();
+      renderGuides();
+    </script>
+  </body>
+</html>
