@@ -1,290 +1,1246 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Odoo Purchase Docs</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              page: "#090f1c",
-              panel: "#111827",
-              panelSoft: "#0f172a",
-              line: "#263244",
-              muted: "#94a3b8",
-              brand: "#2dd4bf",
-              ocean: "#60a5fa",
-            },
-            boxShadow: {
-              soft: "0 18px 45px rgba(0, 0, 0, 0.28)",
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-  <body class="min-h-screen bg-page text-slate-100">
-    <header class="border-b border-line bg-panel">
-      <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-5 lg:px-6">
-        <div class="min-w-0">
-          <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand">Internal Documentation</p>
-          <h1 class="mt-0.5 truncate text-xl font-bold tracking-tight sm:text-2xl">Odoo Purchase Docs</h1>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Fortress ERP — Panduan Purchase per Aktor</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FAFAF9;--white:#FFFFFF;--surface:#F4F3F0;
+  --border:#E8E6E1;--border2:#D4D0C8;
+  --text:#1A1A18;--muted:#6B6860;--dim:#A09D95;
+  --requestor:#5B4FBE;--requestor-bg:#F0EEFF;--requestor-border:#C4BBFF;
+  --prmanager:#0E7A63;--prmanager-bg:#E8F7F3;--prmanager-border:#86CFBC;
+  --finance:#9B5D0A;--finance-bg:#FEF4E6;--finance-border:#F5C97C;
+  --purchasing:#B5303A;--purchasing-bg:#FEF0F0;--purchasing-border:#F5A8AC;
+  --inbound:#1563A4;--inbound-bg:#EDF5FF;--inbound-border:#93C5F7;
+  --system:#3D7A3D;--system-bg:#EDF7ED;--system-border:#8FCF8F;
+  --font:'Plus Jakarta Sans',sans-serif;
+}
+
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;min-height:100vh}
+
+/* HEADER */
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;height:60px;gap:20px;position:sticky;top:0;z-index:100}
+.logo{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--text)}
+.logo-dot{color:var(--requestor)}
+.header-title{font-size:15px;font-weight:500;color:var(--text)}
+.header-sub{font-size:12px;color:var(--dim);margin-left:auto}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.view-toggle{display:flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:3px}
+.view-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted);background:none;border:none;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.view-btn.active{background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+
+/* ACTOR SELECTOR */
+.actor-bar{background:var(--white);border-bottom:2px solid var(--border);padding:0 32px;display:flex;gap:4px;overflow-x:auto;white-space:nowrap}
+.actor-tab{display:flex;align-items:center;gap:10px;padding:14px 20px;cursor:pointer;border-bottom:3px solid transparent;font-size:13px;font-weight:500;color:var(--muted);transition:all .2s;margin-bottom:-2px}
+.actor-tab:hover{color:var(--text)}
+.actor-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.actor-tab.active-requestor{color:var(--requestor);border-bottom-color:var(--requestor)}
+.actor-tab.active-requestor .actor-icon{background:var(--requestor-bg)}
+.actor-tab.active-prmanager{color:var(--prmanager);border-bottom-color:var(--prmanager)}
+.actor-tab.active-prmanager .actor-icon{background:var(--prmanager-bg)}
+.actor-tab.active-finance{color:var(--finance);border-bottom-color:var(--finance)}
+.actor-tab.active-finance .actor-icon{background:var(--finance-bg)}
+.actor-tab.active-purchasing{color:var(--purchasing);border-bottom-color:var(--purchasing)}
+.actor-tab.active-purchasing .actor-icon{background:var(--purchasing-bg)}
+.actor-tab.active-inbound{color:var(--inbound);border-bottom-color:var(--inbound)}
+.actor-tab.active-inbound .actor-icon{background:var(--inbound-bg)}
+.actor-tab.active-finance2{color:var(--system);border-bottom-color:var(--system)}
+.actor-tab.active-finance2 .actor-icon{background:var(--system-bg)}
+
+/* MAIN */
+.main{max-width:900px;margin:0 auto;padding:32px 24px}
+
+/* ACTOR HERO */
+.actor-hero{border-radius:12px;padding:28px 32px;margin-bottom:28px;display:flex;align-items:center;gap:24px}
+.actor-avatar{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;border:2px solid}
+.actor-info h2{font-size:22px;font-weight:700;margin-bottom:4px}
+.actor-info p{font-size:14px;opacity:.8;line-height:1.5}
+.actor-tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.tag{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid}
+
+/* STEP CARDS */
+.steps-title{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:16px}
+
+.step-card{background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;cursor:pointer;transition:all .2s}
+.step-card:hover{border-color:var(--border2);box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.step-card.open{border-color:var(--border2);box-shadow:0 2px 16px rgba(0,0,0,.08)}
+
+.step-header{display:flex;align-items:center;gap:16px;padding:18px 20px}
+.step-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.step-info{flex:1}
+.step-info h3{font-size:15px;font-weight:600;margin-bottom:2px}
+.step-info p{font-size:13px;color:var(--muted)}
+.step-chevron{color:var(--dim);font-size:18px;transition:transform .2s;flex-shrink:0}
+.step-card.open .step-chevron{transform:rotate(90deg)}
+
+.step-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border)}
+.step-card.open .step-body{display:block}
+
+/* MENU PATH */
+.menu-path{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:14px 0;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.menu-path-label{font-size:11px;color:var(--dim);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-right:4px}
+.menu-crumb{background:var(--white);border:1px solid var(--border2);border-radius:5px;padding:4px 10px;font-size:12px;font-weight:500;color:var(--text)}
+.menu-sep{color:var(--dim);font-size:12px}
+.menu-crumb.active{background:var(--text);color:var(--white);border-color:var(--text)}
+
+/* WHAT TO FILL */
+.fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.field-item{background:var(--surface);border-radius:6px;padding:10px 14px}
+.field-label{font-size:11px;color:var(--dim);font-weight:500;margin-bottom:3px}
+.field-value{font-size:13px;color:var(--text);font-weight:500}
+.field-req{color:var(--purchasing);font-size:10px;font-weight:600;margin-left:4px}
+
+/* CHECK LIST */
+.checklist{margin:12px 0}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.check-item:last-child{border-bottom:none}
+.check-box{width:22px;height:22px;border-radius:5px;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.check-box.done{background:var(--system);border-color:var(--system);color:white;font-size:12px}
+.check-text{flex:1;font-size:13px;line-height:1.5}
+.check-text strong{font-weight:600}
+.check-note{font-size:11px;color:var(--dim);margin-top:2px}
+
+/* DECISION CARD */
+.decision{background:var(--surface);border-radius:8px;padding:14px 16px;margin:12px 0}
+.decision-q{font-size:13px;font-weight:600;margin-bottom:10px}
+.decision-opts{display:flex;flex-direction:column;gap:6px}
+.decision-opt{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--white);border:1px solid var(--border);border-radius:6px;font-size:13px}
+.decision-arrow{color:var(--dim);font-size:11px;flex-shrink:0}
+.decision-opt .icon{font-size:16px}
+
+/* ALERT BOXES */
+.alert{border-radius:8px;padding:12px 16px;margin:12px 0;font-size:13px;display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+.alert-icon{font-size:16px;flex-shrink:0}
+.alert.info{background:#EDF5FF;border:1px solid #93C5F7;color:#1563A4}
+.alert.warn{background:#FEF4E6;border:1px solid #F5C97C;color:#9B5D0A}
+.alert.success{background:#EDF7ED;border:1px solid #8FCF8F;color:#3D7A3D}
+.alert.block{background:#FEF0F0;border:1px solid #F5A8AC;color:#B5303A}
+
+/* FLOW VISUAL */
+.flow-visual{display:flex;align-items:center;gap:0;margin:12px 0;flex-wrap:wrap;gap:2px}
+.flow-box{padding:8px 16px;border-radius:6px;font-size:12px;font-weight:500;border:1px solid;text-align:center}
+.flow-arrow{color:var(--dim);padding:0 4px;font-size:18px}
+
+/* TABLE */
+.info-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.info-table th{background:var(--surface);border:1px solid var(--border);padding:8px 12px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.info-table td{border:1px solid var(--border);padding:10px 12px}
+.info-table tr:nth-child(even) td{background:var(--surface)}
+
+/* PILL */
+.pill{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;border:1px solid}
+.pill-green{background:var(--system-bg);border-color:var(--system-border);color:var(--system)}
+.pill-amber{background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance)}
+.pill-red{background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)}
+.pill-blue{background:var(--inbound-bg);border-color:var(--inbound-border);color:var(--inbound)}
+
+/* SECTION DIVIDER */
+.section-div{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.section-div::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* PROGRESS BAR */
+.progress-bar{background:var(--border);border-radius:4px;height:4px;margin:8px 0}
+.progress-fill{height:100%;border-radius:4px;transition:width .3s}
+
+/* PDF LINK */
+.pdf-link{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;transition:all .2s;margin-top:8px;border:1px solid}
+.pdf-link:hover{filter:brightness(0.95)}
+.pdf-link svg{width:14px;height:14px}
+
+/* PDF LIBRARY VIEW */
+.pdf-library{max-width:1100px;margin:0 auto;padding:32px 24px;display:none}
+.pdf-library.active{display:block}
+.pdf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:20px}
+.pdf-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px;transition:all .2s;cursor:pointer;text-decoration:none;color:var(--text)}
+.pdf-card:hover{border-color:var(--border2);box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-2px)}
+.pdf-card h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.pdf-card p{font-size:12px;color:var(--muted)}
+.pdf-cat-title{font-size:16px;font-weight:700;margin-top:28px;margin-bottom:12px;color:var(--text)}
+.pdf-cat-title:first-child{margin-top:0}
+
+/* HIDDEN */
+.hidden{display:none}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .header{padding:0 16px;gap:12px}
+  .actor-bar{padding:0 16px}
+  .actor-tab{padding:12px 14px;font-size:12px;gap:8px}
+  .actor-icon{width:28px;height:28px;font-size:12px}
+  .main{padding:20px 16px}
+  .actor-hero{padding:20px;flex-direction:column;text-align:center;gap:16px}
+  .actor-avatar{width:56px;height:56px;font-size:22px}
+  .actor-tags{justify-content:center}
+  .fields-grid{grid-template-columns:1fr}
+  .flow-visual{flex-direction:column;align-items:stretch}
+  .flow-arrow{transform:rotate(90deg);text-align:center;padding:2px 0}
+  .flow-box{width:100%}
+  .header-sub{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">FORTRESS<span class="logo-dot">.</span>ERP</div>
+  <div class="header-title">Panduan Purchase</div>
+  <div class="header-right">
+    <div class="view-toggle">
+      <button class="view-btn active" onclick="switchView('actor')" id="btn-actor">Per Aktor</button>
+      <button class="view-btn" onclick="switchView('pdf')" id="btn-pdf">Semua PDF</button>
+    </div>
+    <div class="header-sub">PT Jaya Bersama Saputra Perkasa &middot; Odoo 19</div>
+  </div>
+</div>
+
+<!-- ═══════════════ ACTOR VIEW ═══════════════ -->
+<div id="view-actor">
+<div class="actor-bar" id="actor-bar">
+  <div class="actor-tab" onclick="showActor('requestor')" id="tab-requestor">
+    <div class="actor-icon">📋</div>
+    Requestor / Staff
+  </div>
+  <div class="actor-tab" onclick="showActor('prmanager')" id="tab-prmanager">
+    <div class="actor-icon">✅</div>
+    PR Manager
+  </div>
+  <div class="actor-tab" onclick="showActor('finance')" id="tab-finance">
+    <div class="actor-icon">💰</div>
+    Finance / Direksi
+  </div>
+  <div class="actor-tab" onclick="showActor('purchasing')" id="tab-purchasing">
+    <div class="actor-icon">🛒</div>
+    Purchasing
+  </div>
+  <div class="actor-tab" onclick="showActor('inbound')" id="tab-inbound">
+    <div class="actor-icon">📦</div>
+    Inbound / Gudang
+  </div>
+  <div class="actor-tab" onclick="showActor('finance2')" id="tab-finance2">
+    <div class="actor-icon">🏦</div>
+    Finance HQ
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════ REQUESTOR ══════════════════ -->
+<div id="actor-requestor" class="hidden">
+  <div class="actor-hero" style="background:var(--requestor-bg);border:1px solid var(--requestor-border)">
+    <div class="actor-avatar" style="background:var(--requestor-bg);border-color:var(--requestor);font-size:28px">📋</div>
+    <div class="actor-info">
+      <h2 style="color:var(--requestor)">Requestor / Staff</h2>
+      <p>Kamu membuat Purchase Request (PR) untuk kebutuhan divisimu.<br/>PR adalah permintaan pembelian — kamu tidak perlu pilih vendor.</p>
+      <div class="actor-tags">
+        <span class="tag" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)">Staff Inventory</span>
+        <span class="tag" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)">Staff GA</span>
+        <span class="tag" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)">Staff Marketing</span>
+        <span class="tag" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)">Staff IT</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps-title">Yang kamu lakukan — langkah per langkah</div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--requestor-bg);color:var(--requestor)">1</div>
+      <div class="step-info">
+        <h3>Buka menu Purchase Request</h3>
+        <p>Mulai dari sini untuk membuat permintaan pembelian baru</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="menu-path">
+        <span class="menu-path-label">Menu</span>
+        <span class="menu-crumb">Purchase</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb">Purchase Requests</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb active">New</span>
+      </div>
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>Kamu akan melihat form kosong. Isi semua field yang bertanda <span class="pill pill-red">Wajib</span> sebelum submit.</div>
+      </div>
+      <a class="pdf-link" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)" href="How%20to%20Create%20a%20Purchase%20Request.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Create a Purchase Request
+      </a>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--requestor-bg);color:var(--requestor)">2</div>
+      <div class="step-info">
+        <h3>Pilih Jenis PR (PR Type)</h3>
+        <p>Tentukan jenis kebutuhan pembelianmu</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="section-div">Pilih yang sesuai kebutuhanmu</div>
+      <table class="info-table">
+        <tr><th>Jenis PR</th><th>Kapan dipakai</th></tr>
+        <tr><td><strong>OPEX Local</strong></td><td>Beli barang/jasa dari supplier Indonesia</td></tr>
+        <tr><td><strong>OPEX Import</strong></td><td>Beli barang dari luar negeri (China, dll)</td></tr>
+        <tr><td><strong>CAPEX</strong></td><td>Beli aset tetap — mesin, kendaraan, peralatan</td></tr>
+        <tr><td><strong>Marketing</strong></td><td>Kebutuhan promosi, POSM, banner, brosur</td></tr>
+        <tr><td><strong>General Affair</strong></td><td>ATK, kebersihan, kebutuhan kantor harian</td></tr>
+        <tr><td><strong>IT &amp; Infrastruktur</strong></td><td>Hardware, software, lisensi</td></tr>
+        <tr><td><strong>Jasa Trucking</strong></td><td>Pengiriman barang antar gudang</td></tr>
+        <tr><td><strong>Jasa Umum</strong></td><td>Konsultan, maintenance, jasa lainnya</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--requestor-bg);color:var(--requestor)">3</div>
+      <div class="step-info">
+        <h3>Isi detail produk/jasa yang dibutuhkan</h3>
+        <p>Per baris — satu baris untuk satu produk</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="fields-grid">
+        <div class="field-item">
+          <div class="field-label">Produk / Jasa <span class="field-req">WAJIB</span></div>
+          <div class="field-value">Pilih dari daftar produk</div>
         </div>
-        <div class="hidden items-center gap-2 text-xs text-slate-300 sm:flex">
-          <span class="rounded-md border border-line bg-panelSoft px-2.5 py-1 font-medium">15 PDF</span>
-          <span class="rounded-md border border-line bg-panelSoft px-2.5 py-1 font-medium">HTML</span>
+        <div class="field-item">
+          <div class="field-label">Jumlah (Qty) <span class="field-req">WAJIB</span></div>
+          <div class="field-value">Angka kebutuhan</div>
+        </div>
+        <div class="field-item">
+          <div class="field-label">Satuan (UoM) <span class="field-req">WAJIB</span></div>
+          <div class="field-value">Sak, Unit, Meter, dll</div>
+        </div>
+        <div class="field-item">
+          <div class="field-label">Tanggal Butuh <span class="field-req">WAJIB</span></div>
+          <div class="field-value">Kapan barang diperlukan</div>
+        </div>
+        <div class="field-item">
+          <div class="field-label">Estimasi Biaya <span class="field-req">WAJIB</span></div>
+          <div class="field-value">Perkiraan harga per item</div>
+        </div>
+        <div class="field-item">
+          <div class="field-label">Alasan Khusus</div>
+          <div class="field-value">Opsional — jika pembelian mendesak</div>
         </div>
       </div>
-    </header>
+      <div class="alert warn">
+        <span class="alert-icon">&#9888;</span>
+        <div><strong>Jangan isi vendor/supplier</strong> — pemilihan vendor dilakukan oleh tim Purchasing, bukan di form PR.</div>
+      </div>
+    </div>
+  </div>
 
-    <main class="mx-auto grid max-w-7xl gap-4 px-4 py-4 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-start lg:gap-6 lg:px-6">
-      <!-- Sidebar (Categories, Search, and Guide List) -->
-      <div
-        class="min-w-0 flex flex-col gap-4 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto lg:overflow-x-hidden [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-line hover:[&::-webkit-scrollbar-thumb]:bg-slate-600"
-      >
-        <aside class="space-y-3">
-          <section class="rounded-xl border border-line bg-panel p-3 shadow-soft lg:p-4">
-            <label for="categoryFilter" class="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                />
-              </svg>
-              Filter Kategori
-            </label>
-            <div class="relative">
-              <select
-                id="categoryFilter"
-                class="w-full appearance-none rounded-lg border border-line bg-panelSoft pl-3 pr-8 py-2.5 text-sm text-slate-100 outline-none transition focus:border-brand focus:ring-1 focus:ring-brand cursor-pointer"
-              >
-                <option value="all">Semua Kategori</option>
-                <!-- Options populated by JS -->
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-              </div>
-            </div>
-          </section>
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--requestor-bg);color:var(--requestor)">4</div>
+      <div class="step-info">
+        <h3>Submit PR ke PR Manager</h3>
+        <p>Klik tombol Submit — PR akan masuk ke antrian approval</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box done">&#10003;</div>
+          <div class="check-text"><strong>Semua field sudah diisi</strong><div class="check-note">Periksa kembali qty, tanggal butuh, estimasi biaya</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box done">&#10003;</div>
+          <div class="check-text"><strong>Klik tombol "Submit"</strong><div class="check-note">Status PR berubah menjadi "To Approve"</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Tunggu notifikasi dari sistem</strong><div class="check-note">PR Manager akan approve atau reject. Kamu akan dapat notifikasi di Odoo.</div></div>
+        </div>
+      </div>
+      <div class="alert success">
+        <span class="alert-icon">&#10003;</span>
+        <div>Setelah approved, PR diproses oleh tim Purchasing. Kamu bisa cek status PR kapan saja di menu <strong>Purchase Requests</strong>.</div>
+      </div>
+      <a class="pdf-link" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)" href="How%20to%20Check%20PR%20Status%20%26%20Approval%20Progress.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Check PR Status &amp; Approval Progress
+      </a>
+    </div>
+  </div>
 
-          <section class="rounded-xl border border-line bg-panel p-3 shadow-soft lg:p-4">
-            <label for="guideSearch" class="text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              Cari Guide
-            </label>
-            <div class="relative">
-              <input
-                id="guideSearch"
-                type="search"
-                placeholder="PR, RFQ, PO, Receive..."
-                class="w-full rounded-lg border border-line bg-panelSoft pl-3 pr-3 py-2.5 text-sm text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-brand focus:ring-1 focus:ring-brand"
-              />
-            </div>
-          </section>
-        </aside>
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--requestor-bg);color:var(--requestor)">5</div>
+      <div class="step-info">
+        <h3>Edit Draft PR (sebelum submit)</h3>
+        <p>Kalau PR masih draft, kamu bisa edit kapan saja</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Buka PR yang masih draft</strong><div class="check-note">Di menu Purchase Requests, filter status "Draft"</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Edit field yang ingin diubah</strong><div class="check-note">Qty, produk, tanggal butuh, dll</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Simpan atau Submit</strong><div class="check-note">Klik Save untuk simpan draft, atau Submit untuk kirim ke approval</div></div>
+        </div>
+      </div>
+      <a class="pdf-link" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)" href="How%20to%20Edit%20a%20Draft%20PR.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Edit a Draft PR
+      </a>
+    </div>
+  </div>
 
-        <!-- Guide List Grouped in Sidebar -->
-        <section id="guideList" class="min-w-0 space-y-3 pb-4 lg:pb-8"></section>
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--requestor-bg);color:var(--requestor)">6</div>
+      <div class="step-info">
+        <h3>Withdraw PR (tarik kembali)</h3>
+        <p>Kalau PR sudah disubmit tapi mau ditarik kembali</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="alert warn">
+        <span class="alert-icon">&#9888;</span>
+        <div>Withdraw hanya bisa dilakukan jika PR belum di-approve. Setelah approved, hubungi PR Manager untuk reject.</div>
+      </div>
+      <a class="pdf-link" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)" href="How%20to%20Withdraw%20PR.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Withdraw PR
+      </a>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--requestor-bg);color:var(--requestor)">7</div>
+      <div class="step-info">
+        <h3>Jika PR di-reject</h3>
+        <p>Apa yang harus dilakukan jika PR dikembalikan</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="alert block">
+        <span class="alert-icon">&#10007;</span>
+        <div>PR di-reject berarti ada yang perlu diperbaiki. Buka notifikasi untuk lihat alasan reject dari PR Manager.</div>
+      </div>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Buka PR yang di-reject</strong><div class="check-note">Lihat komentar di chatter (bagian bawah form)</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Perbaiki sesuai catatan</strong><div class="check-note">Edit qty, estimasi biaya, atau tambah keterangan</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Submit ulang</strong><div class="check-note">Klik "Submit" kembali setelah revisi</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ PR MANAGER ══════════════════ -->
+<div id="actor-prmanager" class="hidden">
+  <div class="actor-hero" style="background:var(--prmanager-bg);border:1px solid var(--prmanager-border)">
+    <div class="actor-avatar" style="background:var(--prmanager-bg);border-color:var(--prmanager)">✅</div>
+    <div class="actor-info">
+      <h2 style="color:var(--prmanager)">PR Manager</h2>
+      <p>Kamu adalah level approval pertama untuk semua Purchase Request.<br/>Tugasmu: verifikasi kebutuhan, cek budget, approve atau reject PR.</p>
+      <div class="actor-tags">
+        <span class="tag" style="background:var(--prmanager-bg);border-color:var(--prmanager-border);color:var(--prmanager)">Inventory Manager</span>
+        <span class="tag" style="background:var(--prmanager-bg);border-color:var(--prmanager-border);color:var(--prmanager)">GA Manager</span>
+        <span class="tag" style="background:var(--prmanager-bg);border-color:var(--prmanager-border);color:var(--prmanager)">Dept. Manager</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps-title">Tugas dan tanggung jawabmu</div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--prmanager-bg);color:var(--prmanager)">1</div>
+      <div class="step-info">
+        <h3>Terima notifikasi PR baru</h3>
+        <p>Kamu akan dapat notifikasi saat ada PR yang perlu di-review</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="menu-path">
+        <span class="menu-path-label">Menu</span>
+        <span class="menu-crumb">Purchase</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb">Purchase Requests</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb active">To Approve</span>
+      </div>
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>Filter "To Approve" menampilkan semua PR yang menunggu approvalmu. Klik PR untuk buka dan review.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--prmanager-bg);color:var(--prmanager)">2</div>
+      <div class="step-info">
+        <h3>Review isi PR</h3>
+        <p>Verifikasi bahwa PR sudah benar dan sesuai kebutuhan</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Produk dan qty sudah sesuai?</strong><div class="check-note">Pastikan barang yang diminta memang dibutuhkan</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Tanggal kebutuhan realistis?</strong><div class="check-note">Lead time pengadaan biasanya 1–2 minggu untuk lokal</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Estimasi biaya wajar?</strong><div class="check-note">Bandingkan dengan harga historis jika ada</div></div>
+        </div>
       </div>
 
-      <!-- Main Content (PDF Viewer) -->
-      <section class="order-first min-w-0 flex flex-col space-y-3 lg:order-none">
-        <section class="overflow-hidden rounded-xl border border-line bg-panel shadow-soft flex flex-col">
-          <div class="flex flex-col gap-3 border-b border-line bg-panel p-3 sm:flex-row sm:items-center sm:justify-between lg:p-4">
-            <div class="min-w-0 flex items-center gap-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-teal-400/10 text-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <div>
-                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Preview Dokumen</p>
-                <h2 id="currentTitle" class="mt-0.5 truncate text-base font-bold text-slate-100 sm:text-lg">How to Create a Purchase Request</h2>
-              </div>
-            </div>
-            <a
-              id="openCurrentPdf"
-              href="How%20to%20Create%20a%20Purchase%20Request.pdf"
-              target="_blank"
-              rel="noopener"
-              class="inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-bold text-slate-900 transition hover:bg-teal-300 focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-panel"
-            >
-              <span>Buka di Tab Baru</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+      <div class="section-div">Cek budget otomatis</div>
+      <div class="alert warn">
+        <span class="alert-icon">&#9888;</span>
+        <div>Sistem akan menampilkan <strong>warning</strong> di chatter jika PR ini membuat total pembelian minggu ini melebihi batas weekly budget.<br/>&#10230; Warning <strong>tidak memblokir</strong> PR — kamu tetap bisa approve, tapi catat dalam pertimbanganmu.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--prmanager-bg);color:var(--prmanager)">3</div>
+      <div class="step-info">
+        <h3>Approve atau Reject</h3>
+        <p>Keputusanmu menentukan apakah PR lanjut ke proses selanjutnya</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="decision">
+        <div class="decision-q">Apa yang terjadi setelah kamu klik Approve?</div>
+        <div class="decision-opts">
+          <div class="decision-opt">
+            <span class="icon">📦</span>
+            <span><strong>OPEX Local / GA / Service / Marketing:</strong> PR langsung ke Purchasing untuk dibuatkan PO</span>
+            <span class="decision-arrow">&rarr; Purchasing</span>
           </div>
-          <div class="h-[60vh] min-h-[400px] w-full bg-slate-950 sm:h-[70vh] lg:h-[calc(100vh-8.5rem)] lg:min-h-[700px]">
-            <iframe id="pdfViewer" title="PDF Preview" src="How%20to%20Create%20a%20Purchase%20Request.pdf" class="h-full w-full border-none"></iframe>
+          <div class="decision-opt">
+            <span class="icon">🌏</span>
+            <span><strong>OPEX Import:</strong> PR ke Finance untuk approval tambahan (karena USD)</span>
+            <span class="decision-arrow">&rarr; Finance</span>
           </div>
-        </section>
-      </section>
-    </main>
+          <div class="decision-opt">
+            <span class="icon">🏗️</span>
+            <span><strong>CAPEX:</strong> PR ke Finance → lanjut ke Direksi</span>
+            <span class="decision-arrow">&rarr; Finance &rarr; Direksi</span>
+          </div>
+          <div class="decision-opt">
+            <span class="icon">🚛</span>
+            <span><strong>Trucking:</strong> PR ke Purchasing, akan di-merge ke 1 PO per MC event</span>
+            <span class="decision-arrow">&rarr; Purchasing</span>
+          </div>
+        </div>
+      </div>
 
-    <script>
-      const categories = [
-        {
-          id: "purchase-request",
-          name: "Purchase Request",
-          description: "Create, edit, withdraw, status, approval.",
-          guides: ["How to Create a Purchase Request.pdf", "How to Edit a Draft PR.pdf", "How to Withdraw PR.pdf", "How to Check PR Status & Approval Progress.pdf", "How to Approve PR.pdf"],
-        },
-        {
-          id: "rfq-vendor",
-          name: "RFQ & Vendor",
-          description: "RFQ dan compare vendor.",
-          guides: ["How to Create RFQ.pdf", "How to Compare Vendors.pdf"],
-        },
-        {
-          id: "purchase-order",
-          name: "Purchase Order",
-          description: "Create, approve, import PO.",
-          guides: ["How to create PO from RFQ.pdf", "How to Approve PO.pdf", "How to PO Import.pdf"],
-        },
-        {
-          id: "receiving",
-          name: "Receiving",
-          description: "Receive lokal dan import.",
-          guides: ["How to Receive Products.pdf", "How to Local Receive.pdf", "How to Receive Import.pdf"],
-        },
-        {
-          id: "billing-cost",
-          name: "Billing & Cost",
-          description: "Vendor bill dan landed cost.",
-          guides: ["How to Upload Vendor Bill.pdf", "How to Fill Landed Cost.pdf"],
-        },
-      ];
+      <div class="section-div">Jika Reject</div>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Klik "Refuse" / "Reject"</strong><div class="check-note">Wajib isi alasan penolakan</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Isi alasan yang jelas</strong><div class="check-note">Requestor akan membaca alasan ini untuk revisi</div></div>
+        </div>
+      </div>
+      <a class="pdf-link" style="background:var(--prmanager-bg);border-color:var(--prmanager-border);color:var(--prmanager)" href="How%20to%20Approve%20PR.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Approve PR
+      </a>
+    </div>
+  </div>
+</div>
 
-      const categoryFilter = document.getElementById("categoryFilter");
-      const guideList = document.getElementById("guideList");
-      const guideSearch = document.getElementById("guideSearch");
-      const pdfViewer = document.getElementById("pdfViewer");
-      const currentTitle = document.getElementById("currentTitle");
-      const openCurrentPdf = document.getElementById("openCurrentPdf");
+<!-- ══════════════════ FINANCE / DIREKSI ══════════════════ -->
+<div id="actor-finance" class="hidden">
+  <div class="actor-hero" style="background:var(--finance-bg);border:1px solid var(--finance-border)">
+    <div class="actor-avatar" style="background:var(--finance-bg);border-color:var(--finance)">💰</div>
+    <div class="actor-info">
+      <h2 style="color:var(--finance)">Finance &amp; Direksi</h2>
+      <p>Approval tambahan untuk pembelian import (USD) dan aset tetap (CAPEX).<br/>Finance review aspek keuangan. Direksi approve CAPEX karena nilai besar.</p>
+      <div class="actor-tags">
+        <span class="tag" style="background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance)">Finance Manager</span>
+        <span class="tag" style="background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance)">Accounting Manager</span>
+        <span class="tag" style="background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance)">Direksi (CAPEX)</span>
+      </div>
+    </div>
+  </div>
 
-      let activeCategory = "all";
-      let activeGuide = categories[0].guides[0];
+  <div class="steps-title">Kapan kamu dilibatkan</div>
 
-      function guideTitle(fileName) {
-        return fileName.replace(/\.pdf$/i, "");
-      }
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--finance-bg);color:var(--finance)">1</div>
+      <div class="step-info">
+        <h3>Approval Import (OPEX Import)</h3>
+        <p>Pembelian dari vendor luar negeri dalam mata uang USD</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>PR Import sudah di-approve PR Manager. Tugasmu: verifikasi anggaran USD, cek kurs hari ini, dan konfirmasi ketersediaan dana.</div>
+      </div>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Cek kurs USD/IDR hari ini</strong><div class="check-note">Kurs otomatis diupdate sistem setiap pukul 07.00 WIB</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Verifikasi budget import tersedia</strong><div class="check-note">Bandingkan dengan annual budget yang sudah disetujui</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Approve atau Reject dengan catatan</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      function pdfPath(fileName) {
-        return encodeURI(fileName);
-      }
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--finance-bg);color:var(--finance)">2</div>
+      <div class="step-info">
+        <h3>Approval CAPEX (Finance)</h3>
+        <p>Review finansial aset tetap sebelum naik ke Direksi</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Verifikasi masuk dalam CAPEX budget tahunan</strong></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Review estimasi biaya vs market price</strong></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Approve &rarr; PR naik ke Direksi</strong><div class="check-note">Direksi menerima notifikasi setelah Finance approve</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      function setActiveGuide(fileName) {
-        activeGuide = fileName;
-        const path = pdfPath(fileName);
-        pdfViewer.src = path;
-        openCurrentPdf.href = path;
-        currentTitle.textContent = guideTitle(fileName);
-        renderGuides();
-      }
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--finance-bg);color:var(--finance)">3</div>
+      <div class="step-info">
+        <h3>Approval CAPEX (Direksi)</h3>
+        <p>Keputusan final untuk pembelian aset tetap</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>PR sudah melewati PR Manager dan Finance. Direksi memberikan keputusan final — approve atau reject dengan alasan.</div>
+      </div>
+      <div class="flow-visual">
+        <div class="flow-box" style="background:var(--requestor-bg);border-color:var(--requestor-border);color:var(--requestor)">Requestor submit</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="background:var(--prmanager-bg);border-color:var(--prmanager-border);color:var(--prmanager)">PR Manager &#10003;</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance)">Finance &#10003;</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance);font-weight:700">Direksi &larr; kamu</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="background:var(--system-bg);border-color:var(--system-border);color:var(--system)">Purchasing</div>
+      </div>
+      <a class="pdf-link" style="background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance)" href="How%20to%20Approve%20PR.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Approve PR
+      </a>
+    </div>
+  </div>
+</div>
 
-      function setActiveCategory(categoryId) {
-        activeCategory = categoryId;
-        renderCategories();
-        renderGuides();
-        if (window.innerWidth >= 1024) {
-          guideList.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }
+<!-- ══════════════════ PURCHASING ══════════════════ -->
+<div id="actor-purchasing" class="hidden">
+  <div class="actor-hero" style="background:var(--purchasing-bg);border:1px solid var(--purchasing-border)">
+    <div class="actor-avatar" style="background:var(--purchasing-bg);border-color:var(--purchasing)">🛒</div>
+    <div class="actor-info">
+      <h2 style="color:var(--purchasing)">Purchasing</h2>
+      <p>Kamu mengubah PR yang sudah approved menjadi Purchase Order (PO).<br/>Tugasmu: cari vendor, bandingkan penawaran, buat PO, dan kirim ke vendor.</p>
+      <div class="actor-tags">
+        <span class="tag" style="background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)">Staff Purchasing</span>
+        <span class="tag" style="background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)">Purchasing Manager</span>
+      </div>
+    </div>
+  </div>
 
-      function renderCategories() {
-        categoryFilter.innerHTML =
-          `<option value="all">Semua Kategori</option>` +
-          categories
-            .map((category) => {
-              const isSelected = activeCategory === category.id ? "selected" : "";
-              return `<option value="${category.id}" ${isSelected}>${category.name}</option>`;
-            })
-            .join("");
-      }
+  <div class="steps-title">Langkah-langkah membuat PO dari PR</div>
 
-      function renderGuides() {
-        const query = guideSearch.value.trim().toLowerCase();
-        const visibleCategories = categories
-          .filter((category) => activeCategory === "all" || category.id === activeCategory)
-          .map((category) => ({
-            ...category,
-            guides: category.guides.filter((guide) => guideTitle(guide).toLowerCase().includes(query)),
-          }))
-          .filter((category) => category.guides.length > 0);
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--purchasing-bg);color:var(--purchasing)">1</div>
+      <div class="step-info">
+        <h3>Buka PR yang sudah approved</h3>
+        <p>Filter PR dengan status "Approved" — siap dibuatkan PO</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="menu-path">
+        <span class="menu-path-label">Menu</span>
+        <span class="menu-crumb">Purchase</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb">Purchase Requests</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb active">Approved</span>
+      </div>
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>Kamu bisa merge beberapa PR ke 1 PO jika vendor-nya sama. Pilih PR yang relevan &rarr; klik "Create Purchase Order".</div>
+      </div>
+    </div>
+  </div>
 
-        if (visibleCategories.length === 0) {
-          guideList.innerHTML = `
-            <section class="min-w-0 rounded-lg border border-line bg-panel p-2.5 text-sm text-slate-400 shadow-soft lg:p-3">
-              Tidak ada guide yang cocok.
-            </section>
-          `;
-          return;
-        }
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--purchasing-bg);color:var(--purchasing)">2</div>
+      <div class="step-info">
+        <h3>Kirim RFQ ke minimal 3 vendor</h3>
+        <p>Bandingkan penawaran sebelum konfirmasi PO</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Buat RFQ ke vendor 1, 2, dan 3</strong><div class="check-note">Klik "Send by Email" untuk kirim request penawaran</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Tunggu penawaran masuk</strong><div class="check-note">Input harga dari email vendor ke masing-masing RFQ</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Bandingkan harga, lead time, syarat bayar</strong><div class="check-note">Odoo menampilkan tabel perbandingan otomatis</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Pilih vendor terbaik &rarr; Confirm PO</strong></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="pdf-link" style="background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)" href="How%20to%20Create%20RFQ.pdf" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          PDF: How to Create RFQ
+        </a>
+        <a class="pdf-link" style="background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)" href="How%20to%20Compare%20Vendors.pdf" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          PDF: How to Compare Vendors
+        </a>
+      </div>
+    </div>
+  </div>
 
-        guideList.innerHTML = visibleCategories
-          .map(
-            (category) => `
-            <section class="min-w-0 overflow-hidden rounded-lg border border-line bg-panel p-2.5 shadow-soft lg:p-3" id="${category.id}">
-              <div class="mb-2 flex items-center justify-between gap-3">
-                <h3 class="min-w-0 truncate text-xs font-bold uppercase tracking-[0.12em] text-slate-400 lg:text-sm lg:normal-case lg:tracking-normal lg:text-slate-100">${category.name}</h3>
-                <span class="rounded-md bg-panelSoft px-2 py-0.5 text-[11px] font-bold text-slate-400">${category.guides.length}</span>
-              </div>
-              <div class="grid gap-1.5">
-                ${category.guides
-                  .map((guide) => {
-                    const isActive = activeGuide === guide;
-                    return `
-                    <article class="min-w-0 overflow-hidden rounded-md border ${isActive ? "border-brand/70 bg-teal-400/10" : "border-line bg-panelSoft"} px-2.5 py-2 transition hover:border-brand/70">
-                      <div class="min-w-0 flex items-start justify-between gap-2">
-                        <button
-                          type="button"
-                          class="block min-w-0 flex-1 text-left"
-                          data-guide="${guide}"
-                        >
-                          <span class="block truncate text-sm font-semibold ${isActive ? "text-brand" : "text-slate-200"}">${guideTitle(guide)}</span>
-                        </button>
-                        <a
-                          href="${pdfPath(guide)}"
-                          target="_blank"
-                          rel="noopener"
-                          class="shrink-0 text-[11px] font-bold text-ocean hover:text-blue-300"
-                        >
-                          Open
-                        </a>
-                      </div>
-                    </article>
-                  `;
-                  })
-                  .join("")}
-              </div>
-            </section>
-          `,
-          )
-          .join("");
-      }
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--purchasing-bg);color:var(--purchasing)">3</div>
+      <div class="step-info">
+        <h3>Skenario 4 variasi PR &rarr; PO</h3>
+        <p>Bagaimana cara handle berbagai situasi</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <table class="info-table">
+        <tr><th>Situasi</th><th>Yang kamu lakukan</th><th>Hasil</th></tr>
+        <tr><td>1 PR, 1 vendor</td><td>Select PR &rarr; pilih vendor &rarr; Confirm</td><td>1 PO</td></tr>
+        <tr><td>1 PR, vendor beda per produk</td><td>Pisah per line &rarr; buat PO per vendor</td><td>2&ndash;3 PO</td></tr>
+        <tr><td>Beberapa PR, vendor sama</td><td>Select semua PR &rarr; merge &rarr; Confirm</td><td>1 PO gabungan</td></tr>
+        <tr><td>PR Trucking (dari INV+GA+MKT)</td><td>Merge &rarr; isi field MC Picking (gudang tujuan)</td><td>1 PO Trucking per MC event</td></tr>
+      </table>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="pdf-link" style="background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)" href="How%20to%20create%20PO%20from%20RFQ.pdf" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          PDF: How to create PO from RFQ
+        </a>
+        <a class="pdf-link" style="background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)" href="How%20to%20Approve%20PO.pdf" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          PDF: How to Approve PO
+        </a>
+      </div>
+    </div>
+  </div>
 
-      categoryFilter.addEventListener("change", (event) => {
-        setActiveCategory(event.target.value);
-      });
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--purchasing-bg);color:var(--purchasing)">4</div>
+      <div class="step-info">
+        <h3>Khusus: PR Trucking</h3>
+        <p>Ada langkah tambahan untuk PR pengiriman antar gudang</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>PR Trucking dari beberapa dept (Inventory, GA, Marketing) untuk 1 pengiriman MC &rarr; digabung jadi 1 PO ke 1 vendor trucking.</div>
+      </div>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Merge semua PR Trucking terkait</strong></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Isi field "MC Picking"</strong><div class="check-note">Pilih MC-Out JKT yang sesuai &rarr; sistem otomatis mengisi analytic cabang tujuan</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Confirm PO &rarr; kirim ke vendor trucking</strong></div>
+        </div>
+      </div>
+      <div class="alert warn">
+        <span class="alert-icon">&#9888;</span>
+        <div>PPH 23 akan dipotong otomatis oleh Finance saat pembayaran ke vendor trucking. Kamu tidak perlu hitung manual.</div>
+      </div>
+    </div>
+  </div>
 
-      guideList.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-guide]");
-        if (!button) return;
-        setActiveGuide(button.dataset.guide);
-      });
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--purchasing-bg);color:var(--purchasing)">5</div>
+      <div class="step-info">
+        <h3>Monitoring China Import</h3>
+        <p>Update status barang import dari China secara berkala</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="flow-visual" style="gap:4px">
+        <div class="flow-box" style="font-size:11px;background:var(--surface);border-color:var(--border);color:var(--muted)">ordered</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="font-size:11px;background:var(--surface);border-color:var(--border);color:var(--muted)">wip</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="font-size:11px;background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance)">ready_china</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="font-size:11px;background:var(--finance-bg);border-color:var(--finance-border);color:var(--finance)">shipped</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="font-size:11px;background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)">customs</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="font-size:11px;background:var(--system-bg);border-color:var(--system-border);color:var(--system)">received</div>
+      </div>
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>Update status secara berkala di PO. Sistem akan mengirim alert jika estimasi kedatangan terlewat.</div>
+      </div>
+      <a class="pdf-link" style="background:var(--purchasing-bg);border-color:var(--purchasing-border);color:var(--purchasing)" href="How%20to%20PO%20Import.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to PO Import
+      </a>
+    </div>
+  </div>
+</div>
 
-      guideSearch.addEventListener("input", renderGuides);
+<!-- ══════════════════ INBOUND / GUDANG ══════════════════ -->
+<div id="actor-inbound" class="hidden">
+  <div class="actor-hero" style="background:var(--inbound-bg);border:1px solid var(--inbound-border)">
+    <div class="actor-avatar" style="background:var(--inbound-bg);border-color:var(--inbound)">📦</div>
+    <div class="actor-info">
+      <h2 style="color:var(--inbound)">Inbound / Gudang</h2>
+      <p>Kamu menerima barang secara fisik dan memvalidasi di sistem Odoo.<br/>Ada 2 peran: <strong>Inbound Coordinator JKT</strong> (terima &amp; MC-Out) dan <strong>Staff Inbound Cabang</strong> (MC-In).</p>
+      <div class="actor-tags">
+        <span class="tag" style="background:var(--inbound-bg);border-color:var(--inbound-border);color:var(--inbound)">Inbound Coordinator JKT</span>
+        <span class="tag" style="background:var(--inbound-bg);border-color:var(--inbound-border);color:var(--inbound)">Staff Inbound Cabang</span>
+      </div>
+    </div>
+  </div>
 
-      renderCategories();
-      renderGuides();
-    </script>
-  </body>
+  <div class="steps-title">Tugas Inbound Coordinator JKT</div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--inbound-bg);color:var(--inbound)">1</div>
+      <div class="step-info">
+        <h3>Terima barang dari supplier</h3>
+        <p>Validasi receipt saat barang tiba di gudang JKT</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="menu-path">
+        <span class="menu-path-label">Menu</span>
+        <span class="menu-crumb">Inventory</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb">Operations</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb">Transfers</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb active">Receipts</span>
+      </div>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Cek fisik barang sesuai PO</strong><div class="check-note">Qty, kondisi, dan spesifikasi barang</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Klik "Validate" di receipt Odoo</strong><div class="check-note">Stok JKT otomatis bertambah</div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="pdf-link" style="background:var(--inbound-bg);border-color:var(--inbound-border);color:var(--inbound)" href="How%20to%20Receive%20Products.pdf" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          PDF: How to Receive Products
+        </a>
+        <a class="pdf-link" style="background:var(--inbound-bg);border-color:var(--inbound-border);color:var(--inbound)" href="How%20to%20Receive%20Import.pdf" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          PDF: How to Receive Import
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--inbound-bg);color:var(--inbound)">2</div>
+      <div class="step-info">
+        <h3>Buat MC-Out ke cabang tujuan</h3>
+        <p>Kirim barang dari JKT ke cabang via transit</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="menu-path">
+        <span class="menu-path-label">Menu</span>
+        <span class="menu-crumb">Inventory</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb">Operations</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb active">Internal Transfers</span>
+      </div>
+      <div class="flow-visual">
+        <div class="flow-box" style="background:var(--inbound-bg);border-color:var(--inbound-border);color:var(--inbound)">JKT/Stock</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="background:var(--surface);border-color:var(--border);color:var(--muted)">Virtual/Intransit</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-box" style="background:var(--surface);border-color:var(--border);color:var(--muted)">Cabang/Stock</div>
+      </div>
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>Nomor dokumen MC-Out: <strong>MCOUT-JKT-YYMMXXXXX</strong><br/>Setelah validate &rarr; barang masuk ke Intransit, stok JKT berkurang.</div>
+      </div>
+      <div class="alert warn">
+        <span class="alert-icon">&#9888;</span>
+        <div><strong>Aturan penting:</strong> Barang TIDAK boleh dikirim langsung cabang ke cabang. Semua harus lewat JKT.</div>
+      </div>
+      <a class="pdf-link" style="background:var(--inbound-bg);border-color:var(--inbound-border);color:var(--inbound)" href="How%20to%20Local%20Receive.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Local Receive
+      </a>
+    </div>
+  </div>
+
+  <div class="steps-title" style="margin-top:24px">Tugas Staff Inbound Cabang</div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--inbound-bg);color:var(--inbound)">3</div>
+      <div class="step-info">
+        <h3>Terima MC-In di cabang</h3>
+        <p>Validasi penerimaan barang dari JKT di sistem</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Terima barang fisik dari kurir/trucking</strong></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Cek qty dan kondisi barang</strong><div class="check-note">Pastikan sesuai dengan dokumen MC-Out dari JKT</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Buka Transfers &rarr; MCIN-CABANG-xxx &rarr; Validate</strong><div class="check-note">Stok cabang otomatis bertambah</div></div>
+        </div>
+      </div>
+      <div class="alert success">
+        <span class="alert-icon">&#10003;</span>
+        <div>Setelah validate: stok cabang bertambah, Intransit berkurang. Proses selesai di sisi gudang.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ FINANCE HQ ══════════════════ -->
+<div id="actor-finance2" class="hidden">
+  <div class="actor-hero" style="background:var(--system-bg);border:1px solid var(--system-border)">
+    <div class="actor-avatar" style="background:var(--system-bg);border-color:var(--system)">🏦</div>
+    <div class="actor-info">
+      <h2 style="color:var(--system)">Finance HQ</h2>
+      <p>Kamu memproses Vendor Bill, matching ke PO, dan melakukan pembayaran ke vendor.<br/>Juga mengurus rekonsiliasi kurs untuk pembelian USD.</p>
+      <div class="actor-tags">
+        <span class="tag" style="background:var(--system-bg);border-color:var(--system-border);color:var(--system)">Accounting Staff</span>
+        <span class="tag" style="background:var(--system-bg);border-color:var(--system-border);color:var(--system)">Accounting Manager</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps-title">Langkah-langkah proses Vendor Bill</div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--system-bg);color:var(--system)">1</div>
+      <div class="step-info">
+        <h3>Terima invoice dari vendor</h3>
+        <p>Input invoice vendor ke Odoo dan match ke PO</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="menu-path">
+        <span class="menu-path-label">Menu</span>
+        <span class="menu-crumb">Purchase</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb">[PO terkait]</span>
+        <span class="menu-sep">&rsaquo;</span>
+        <span class="menu-crumb active">Create Bill</span>
+      </div>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Buka PO yang barangnya sudah diterima</strong></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Klik "Create Bill"</strong><div class="check-note">Odoo otomatis mengisi qty dari receipt yang sudah validated</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Cocokkan dengan invoice fisik dari vendor</strong><div class="check-note">Pastikan harga, qty, dan nomor PO sesuai</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Klik "Confirm" untuk post bill</strong></div>
+        </div>
+      </div>
+      <a class="pdf-link" style="background:var(--system-bg);border-color:var(--system-border);color:var(--system)" href="How%20to%20Upload%20Vendor%20Bill.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Upload Vendor Bill
+      </a>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--system-bg);color:var(--system)">2</div>
+      <div class="step-info">
+        <h3>Bayar vendor</h3>
+        <p>Proses pembayaran sesuai payment term yang disepakati</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Cek due date pembayaran</strong><div class="check-note">Lihat di tab "Payment Terms" di Vendor Bill</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Klik "Register Payment"</strong><div class="check-note">Pilih jurnal bank yang sesuai (BCA / OCBC)</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Untuk Trucking: PPH 23 dipotong otomatis</strong><div class="check-note">Sistem menghitung 2% (NPWP) atau 4% (non-NPWP)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--system-bg);color:var(--system)">3</div>
+      <div class="step-info">
+        <h3>Rekonsiliasi kurs (Import USD)</h3>
+        <p>Proses selisih kurs antara tanggal PO dan tanggal pembayaran</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <div class="alert info">
+        <span class="alert-icon">&#8505;</span>
+        <div>Untuk pembelian USD: kurs saat GR berbeda dari kurs saat bayar &rarr; ada <strong>realized gain/loss</strong> yang dicatat otomatis oleh sistem.</div>
+      </div>
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-box done">&#10003;</div>
+          <div class="check-text"><strong>Realized Gain/Loss</strong><div class="check-note">Otomatis dicatat saat payment matching — tidak perlu input manual</div></div>
+        </div>
+        <div class="check-item">
+          <div class="check-box"></div>
+          <div class="check-text"><strong>Unrealized Gain/Loss (akhir bulan)</strong><div class="check-note">Buka Accounting &rarr; Accounting &rarr; Adjustment Entries &rarr; isi selisih kurs akhir bulan</div></div>
+        </div>
+      </div>
+      <a class="pdf-link" style="background:var(--system-bg);border-color:var(--system-border);color:var(--system)" href="How%20to%20Fill%20Landed%20Cost.pdf" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Lihat PDF: How to Fill Landed Cost
+      </a>
+    </div>
+  </div>
+
+  <div class="step-card" onclick="toggleStep(this)">
+    <div class="step-header">
+      <div class="step-num" style="background:var(--system-bg);color:var(--system)">4</div>
+      <div class="step-info">
+        <h3>Apa yang dicatat sistem secara otomatis</h3>
+        <p>Journal entries yang dibuat sistem — kamu tidak perlu input manual</p>
+      </div>
+      <div class="step-chevron">&rsaquo;</div>
+    </div>
+    <div class="step-body">
+      <table class="info-table">
+        <tr><th>Event</th><th>Yang dicatat sistem</th></tr>
+        <tr><td>Barang tiba (GR Validated)</td><td>Stok masuk &rarr; Hutang ke supplier bertambah</td></tr>
+        <tr><td>Vendor Bill dikonfirmasi</td><td>Hutang terkonfirmasi sesuai invoice</td></tr>
+        <tr><td>Pembayaran dilakukan</td><td>Hutang berkurang, saldo bank berkurang</td></tr>
+        <tr><td>Barang keluar ke customer (DO)</td><td>HPP dicatat, stok berkurang</td></tr>
+        <tr><td>Selisih kurs USD</td><td>Gain/Loss kurs dicatat otomatis</td></tr>
+      </table>
+      <div class="alert success">
+        <span class="alert-icon">&#10003;</span>
+        <div>Semua journal entries dibuat otomatis oleh sistem. Fokusmu adalah memastikan <strong>data input sudah benar</strong> sebelum validate/confirm.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .main -->
+</div><!-- end #view-actor -->
+
+<!-- ═══════════════ PDF LIBRARY VIEW ═══════════════ -->
+<div id="view-pdf" class="pdf-library">
+  <h2 style="font-size:20px;font-weight:700">Semua Dokumen PDF</h2>
+  <p style="color:var(--muted);font-size:14px;margin-top:4px">Klik untuk membuka dokumen di tab baru</p>
+
+  <h3 class="pdf-cat-title">📋 Purchase Request</h3>
+  <div class="pdf-grid">
+    <a class="pdf-card" href="How%20to%20Create%20a%20Purchase%20Request.pdf" target="_blank"><h4>How to Create a Purchase Request</h4><p>Cara membuat PR baru di Odoo</p></a>
+    <a class="pdf-card" href="How%20to%20Edit%20a%20Draft%20PR.pdf" target="_blank"><h4>How to Edit a Draft PR</h4><p>Edit PR yang masih draft</p></a>
+    <a class="pdf-card" href="How%20to%20Withdraw%20PR.pdf" target="_blank"><h4>How to Withdraw PR</h4><p>Tarik kembali PR yang sudah disubmit</p></a>
+    <a class="pdf-card" href="How%20to%20Check%20PR%20Status%20%26%20Approval%20Progress.pdf" target="_blank"><h4>How to Check PR Status &amp; Approval Progress</h4><p>Cek status dan progress approval PR</p></a>
+    <a class="pdf-card" href="How%20to%20Approve%20PR.pdf" target="_blank"><h4>How to Approve PR</h4><p>Cara approve Purchase Request</p></a>
+  </div>
+
+  <h3 class="pdf-cat-title">🛒 RFQ &amp; Vendor</h3>
+  <div class="pdf-grid">
+    <a class="pdf-card" href="How%20to%20Create%20RFQ.pdf" target="_blank"><h4>How to Create RFQ</h4><p>Buat Request for Quotation ke vendor</p></a>
+    <a class="pdf-card" href="How%20to%20Compare%20Vendors.pdf" target="_blank"><h4>How to Compare Vendors</h4><p>Bandingkan penawaran antar vendor</p></a>
+  </div>
+
+  <h3 class="pdf-cat-title">📄 Purchase Order</h3>
+  <div class="pdf-grid">
+    <a class="pdf-card" href="How%20to%20create%20PO%20from%20RFQ.pdf" target="_blank"><h4>How to Create PO from RFQ</h4><p>Buat PO dari RFQ yang sudah dipilih</p></a>
+    <a class="pdf-card" href="How%20to%20Approve%20PO.pdf" target="_blank"><h4>How to Approve PO</h4><p>Cara approve Purchase Order</p></a>
+    <a class="pdf-card" href="How%20to%20PO%20Import.pdf" target="_blank"><h4>How to PO Import</h4><p>Handle PO untuk pembelian import</p></a>
+  </div>
+
+  <h3 class="pdf-cat-title">📦 Receiving</h3>
+  <div class="pdf-grid">
+    <a class="pdf-card" href="How%20to%20Receive%20Products.pdf" target="_blank"><h4>How to Receive Products</h4><p>Validasi receipt barang di gudang</p></a>
+    <a class="pdf-card" href="How%20to%20Local%20Receive.pdf" target="_blank"><h4>How to Local Receive</h4><p>Terima barang dari transfer internal</p></a>
+    <a class="pdf-card" href="How%20to%20Receive%20Import.pdf" target="_blank"><h4>How to Receive Import</h4><p>Terima barang import</p></a>
+  </div>
+
+  <h3 class="pdf-cat-title">🏦 Billing &amp; Cost</h3>
+  <div class="pdf-grid">
+    <a class="pdf-card" href="How%20to%20Upload%20Vendor%20Bill.pdf" target="_blank"><h4>How to Upload Vendor Bill</h4><p>Input invoice vendor ke Odoo</p></a>
+    <a class="pdf-card" href="How%20to%20Fill%20Landed%20Cost.pdf" target="_blank"><h4>How to Fill Landed Cost</h4><p>Isi landed cost untuk import</p></a>
+  </div>
+</div>
+
+<script>
+function showActor(id){
+  const actors = ['requestor','prmanager','finance','purchasing','inbound','finance2'];
+  actors.forEach(a=>{
+    document.getElementById('actor-'+a).classList.add('hidden');
+    const tab = document.getElementById('tab-'+a);
+    tab.className = 'actor-tab';
+  });
+  document.getElementById('actor-'+id).classList.remove('hidden');
+  const tab = document.getElementById('tab-'+id);
+  tab.className = 'actor-tab active-'+id;
+}
+
+function toggleStep(card){
+  card.classList.toggle('open');
+}
+
+function switchView(view){
+  const actorView = document.getElementById('view-actor');
+  const pdfView = document.getElementById('view-pdf');
+  const btnActor = document.getElementById('btn-actor');
+  const btnPdf = document.getElementById('btn-pdf');
+
+  if(view === 'actor'){
+    actorView.style.display = 'block';
+    pdfView.classList.remove('active');
+    btnActor.classList.add('active');
+    btnPdf.classList.remove('active');
+  } else {
+    actorView.style.display = 'none';
+    pdfView.classList.add('active');
+    btnPdf.classList.add('active');
+    btnActor.classList.remove('active');
+  }
+}
+
+showActor('requestor');
+document.getElementById('tab-requestor').className = 'actor-tab active-requestor';
+</script>
+</body>
 </html>
