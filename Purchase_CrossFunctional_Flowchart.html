@@ -51,6 +51,30 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .sw-hdr span{font-size:11px;color:var(--gold-l)}
 .svg-wrap{overflow-x:auto;padding:14px 10px}
 .svg-wrap svg{display:block}
+.svg-wrap svg line[stroke="#9A9080"],
+.svg-wrap svg path[stroke="#9A9080"]{
+  stroke:#7D7364;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+.svg-wrap svg line[marker-end],
+.svg-wrap svg path[marker-end]{
+  stroke-width:1.9;
+}
+.svg-wrap svg line[stroke-dasharray]{
+  stroke-linecap:round;
+  stroke-dasharray:4 5;
+}
+.svg-wrap svg line[stroke="#DDD0B0"]{opacity:.6;vector-effect:non-scaling-stroke}
+.svg-wrap svg line[stroke="#C8BA90"]{opacity:.75;vector-effect:non-scaling-stroke}
+.svg-wrap svg marker path{
+  stroke-width:1.9;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.svg-wrap svg marker path[stroke="#9A9080"]{stroke:#7D7364}
 
 .leg{display:flex;flex-wrap:wrap;gap:8px;padding:9px 14px;background:var(--bg2);border-top:1px solid var(--border);font-size:10px}
 .li{display:flex;align-items:center;gap:4px;color:var(--text2)}
@@ -187,7 +211,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="sw">
 <div class="sw-hdr"><h3>Main Purchase Flow</h3><span>PR → Approval → PO → GR → Invoice → Payment &nbsp;|&nbsp; Klik node berwarna untuk sub-flow</span></div>
 <div class="svg-wrap">
-<svg viewBox="0 0 1180 360" xmlns="http://www.w3.org/2000/svg" style="min-width:920px;width:100%">
+<svg viewBox="0 0 1280 360" xmlns="http://www.w3.org/2000/svg" style="min-width:1020px;width:100%">
 <defs>
 <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker>
 <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#3B6D11" stroke-width="1.5" stroke-linecap="round"/></marker>
@@ -195,27 +219,29 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#C9962A" stroke-width="1.5" stroke-linecap="round"/></marker>
 </defs>
 <!-- lane BG -->
-<rect x="0" y="0" width="1180" height="45" fill="#F1EFE8"/>
-<rect x="0" y="45" width="1180" height="45" fill="#EEEDFE"/>
-<rect x="0" y="90" width="1180" height="45" fill="#FAEEDA"/>
-<rect x="0" y="135" width="1180" height="45" fill="#E6F1FB"/>
-<rect x="0" y="180" width="1180" height="45" fill="#FBEAF0"/>
-<rect x="0" y="225" width="1180" height="45" fill="#EAF3DE"/>
-<rect x="0" y="270" width="1180" height="90" fill="#E1F5EE"/>
-<text x="5" y="26" font-size="9.5" font-weight="700" fill="#5F5E5A" font-family="Plus Jakarta Sans">User / HOD</text>
-<text x="5" y="70" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Purchasing</text>
-<text x="5" y="115" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Finance / Cost Control</text>
-<text x="5" y="160" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">CEO / Direksi</text>
-<text x="5" y="204" font-size="9.5" font-weight="700" fill="#993556" font-family="Plus Jakarta Sans">Accounting</text>
-<text x="5" y="248" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">Warehouse / Inventory</text>
-<text x="5" y="295" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem Odoo (Auto)</text>
-<line x1="105" y1="0" x2="105" y2="360" stroke="#C8BA90" stroke-width="1"/>
-<line x1="0" y1="45" x2="1180" y2="45" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="90" x2="1180" y2="90" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="135" x2="1180" y2="135" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="180" x2="1180" y2="180" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="225" x2="1180" y2="225" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="270" x2="1180" y2="270" stroke="#DDD0B0" stroke-width="0.5"/>
+<rect x="0" y="0" width="1280" height="45" fill="#F1EFE8"/>
+<rect x="0" y="45" width="1280" height="45" fill="#EEEDFE"/>
+<rect x="0" y="90" width="1280" height="45" fill="#FAEEDA"/>
+<rect x="0" y="135" width="1280" height="45" fill="#E6F1FB"/>
+<rect x="0" y="180" width="1280" height="45" fill="#FBEAF0"/>
+<rect x="0" y="225" width="1280" height="45" fill="#EAF3DE"/>
+<rect x="0" y="270" width="1280" height="90" fill="#E1F5EE"/>
+<rect x="0" y="0" width="210" height="360" fill="#FFFFFF" opacity=".18"/>
+<text x="12" y="26" font-size="9.5" font-weight="700" fill="#5F5E5A" font-family="Plus Jakarta Sans">User / HOD</text>
+<text x="12" y="70" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Purchasing</text>
+<text x="12" y="115" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Finance / Cost Control</text>
+<text x="12" y="160" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">CEO / Direksi</text>
+<text x="12" y="204" font-size="9.5" font-weight="700" fill="#993556" font-family="Plus Jakarta Sans">Accounting</text>
+<text x="12" y="248" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">Warehouse / Inventory</text>
+<text x="12" y="295" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem Odoo (Auto)</text>
+<line x1="210" y1="0" x2="210" y2="360" stroke="#C8BA90" stroke-width="1"/>
+<line x1="0" y1="45" x2="1280" y2="45" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="90" x2="1280" y2="90" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="135" x2="1280" y2="135" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="180" x2="1280" y2="180" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="225" x2="1280" y2="225" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="270" x2="1280" y2="270" stroke="#DDD0B0" stroke-width="0.5"/>
+<g transform="translate(100 0)">
 
 <!-- START -->
 <circle cx="128" cy="22" r="13" fill="#E8B84B" stroke="#C9962A" stroke-width="2"/>
@@ -283,40 +309,40 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <!-- China Import hint (drill) -->
 <g class="cn sf" onclick="go('china')">
-<rect x="932" y="97" width="110" height="32" rx="5" fill="#FDF3DC" stroke="#C9962A" stroke-width="1.5"/>
+<rect x="926" y="97" width="122" height="32" rx="5" fill="#FDF3DC" stroke="#C9962A" stroke-width="1.5"/>
 <text x="987" y="111" text-anchor="middle" font-size="10.5" font-weight="700" fill="#633806" font-family="Plus Jakarta Sans">China Import</text>
 <text x="987" y="122" text-anchor="middle" font-size="8.5" fill="#C9962A" font-family="Plus Jakarta Sans">LT Tracking ↗</text>
 </g>
-<line x1="901" y1="113" x2="932" y2="113" stroke="#C9962A" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ao)"/>
+<line x1="901" y1="113" x2="926" y2="113" stroke="#C9962A" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#ao)"/>
 
 <!-- GR (drill) -->
 <g class="cn sf" onclick="go('gr')">
-<rect x="800" y="240" width="96" height="32" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
+<rect x="792" y="240" width="112" height="32" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
 <text x="848" y="254" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">GR / Receive</text>
 <text x="848" y="265" text-anchor="middle" font-size="8.5" fill="#3B6D11" font-family="Plus Jakarta Sans">1-step ↗ drill-down</text>
 </g>
 <line x1="848" y1="272" x2="848" y2="283" stroke="#9A9080" stroke-width="1.5" marker-end="url(#ah)"/>
 
 <!-- AVCO Update -->
-<rect x="800" y="283" width="96" height="30" rx="5" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<rect x="792" y="283" width="112" height="30" rx="5" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
 <text x="848" y="296" text-anchor="middle" font-size="10" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">AVCO Update</text>
 <text x="848" y="307" text-anchor="middle" font-size="8.5" fill="#0F6E56" font-family="Plus Jakarta Sans">stock.valuation</text>
 
 <!-- MC/SRS drill -->
 <g class="cn sf" onclick="go('mc')">
-<rect x="960" y="240" width="96" height="32" rx="5" fill="#FAECE7" stroke="#993C1D" stroke-width="1.5"/>
+<rect x="952" y="240" width="112" height="32" rx="5" fill="#FAECE7" stroke="#993C1D" stroke-width="1.5"/>
 <text x="1008" y="254" text-anchor="middle" font-size="10.5" font-weight="700" fill="#993C1D" font-family="Plus Jakarta Sans">MC / SRS</text>
 <text x="1008" y="265" text-anchor="middle" font-size="8.5" fill="#993C1D" font-family="Plus Jakarta Sans">JKT→Branch ↗</text>
 </g>
-<line x1="896" y1="256" x2="960" y2="256" stroke="#993C1D" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ac)"/>
+<line x1="904" y1="256" x2="952" y2="256" stroke="#993C1D" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ac)"/>
 
 <!-- PG drill -->
 <g class="cn sf" onclick="go('pg')">
-<rect x="1075" y="240" width="96" height="32" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
+<rect x="1074" y="240" width="98" height="32" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
 <text x="1123" y="254" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">PG</text>
 <text x="1123" y="265" text-anchor="middle" font-size="8.5" fill="#3B6D11" font-family="Plus Jakarta Sans">Pindah Gudang ↗</text>
 </g>
-<line x1="1056" y1="256" x2="1075" y2="256" stroke="#3B6D11" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+<line x1="1064" y1="256" x2="1074" y2="256" stroke="#3B6D11" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ag)"/>
 
 <!-- 3-way match dashed -->
 <line x1="800" y1="256" x2="660" y2="256" stroke="#9A9080" stroke-width="1" stroke-dasharray="5 3"/>
@@ -334,16 +360,16 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <!-- Payment -->
 <g class="cn" onclick="det('pay')">
-<rect x="480" y="186" width="100" height="32" rx="5" fill="#FBEAF0" stroke="#993556" stroke-width="1.5"/>
-<text x="530" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="#993556" font-family="Plus Jakarta Sans">Payment</text>
-<text x="530" y="211" text-anchor="middle" font-size="8.5" fill="#993556" font-family="Plus Jakarta Sans">IDR / USD</text>
+<rect x="492" y="186" width="96" height="32" rx="5" fill="#FBEAF0" stroke="#993556" stroke-width="1.5"/>
+<text x="540" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="#993556" font-family="Plus Jakarta Sans">Payment</text>
+<text x="540" y="211" text-anchor="middle" font-size="8.5" fill="#993556" font-family="Plus Jakarta Sans">IDR / USD</text>
 </g>
-<line x1="600" y1="202" x2="580" y2="202" stroke="#9A9080" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="600" y1="202" x2="588" y2="202" stroke="#9A9080" stroke-width="1.5" marker-end="url(#ah)"/>
 
 <!-- GW USD -->
 <polygon points="453,182 478,202 453,222 428,202" fill="white" stroke="#C9962A" stroke-width="1.5"/>
 <text x="453" y="200" text-anchor="middle" font-size="8.5" fill="#633806" font-weight="700" font-family="Plus Jakarta Sans">USD?</text>
-<line x1="480" y1="202" x2="478" y2="202" stroke="#9A9080" stroke-width="1.5" marker-end="url(#ah)"/>
+<line x1="492" y1="202" x2="478" y2="202" stroke="#9A9080" stroke-width="1.5" marker-end="url(#ah)"/>
 
 <!-- IDR path end -->
 <line x1="428" y1="202" x2="388" y2="202" stroke="#9A9080" stroke-width="1.5" marker-end="url(#ah)"/>
@@ -354,9 +380,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <!-- USD → FX -->
 <line x1="453" y1="222" x2="453" y2="300" stroke="#9A9080" stroke-width="1.5" marker-end="url(#ah)"/>
 <text x="465" y="265" font-size="8" fill="#185FA5" font-family="Plus Jakarta Sans">USD</text>
-<rect x="400" y="300" width="120" height="28" rx="5" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
-<text x="460" y="312" text-anchor="middle" font-size="10" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Realized FX</text>
-<text x="460" y="322" text-anchor="middle" font-size="8.5" fill="#0F6E56" font-family="Plus Jakarta Sans">akun 71001 auto</text>
+<rect x="389" y="300" width="128" height="28" rx="5" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<text x="453" y="312" text-anchor="middle" font-size="10" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Realized FX</text>
+<text x="453" y="322" text-anchor="middle" font-size="8.5" fill="#0F6E56" font-family="Plus Jakarta Sans">COA 71001 auto</text>
+</g>
 </svg>
 </div>
 <div class="leg">
@@ -376,26 +403,29 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="sw">
 <div class="sw-hdr"><h3>PR Approval — TAM-3 sampai TAM-7</h3><span>Jalur approval berbeda berdasarkan pr_type yang dipilih</span></div>
 <div class="svg-wrap">
-<svg viewBox="0 0 1100 310" xmlns="http://www.w3.org/2000/svg" style="min-width:860px;width:100%">
+<svg viewBox="0 0 1200 310" xmlns="http://www.w3.org/2000/svg" style="min-width:960px;width:100%">
 <defs><marker id="bh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-<rect x="0" y="0" width="1100" height="46" fill="#F1EFE8"/>
-<rect x="0" y="46" width="1100" height="46" fill="#EEEDFE"/>
-<rect x="0" y="92" width="1100" height="46" fill="#FAEEDA"/>
-<rect x="0" y="138" width="1100" height="46" fill="#E6F1FB"/>
-<rect x="0" y="184" width="1100" height="46" fill="#EEEDFE"/>
-<rect x="0" y="230" width="1100" height="80" fill="#EAF3DE"/>
-<text x="5" y="26" font-size="9.5" font-weight="700" fill="#5F5E5A" font-family="Plus Jakarta Sans">User / HOD</text>
-<text x="5" y="72" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Purchasing Manager (PR Manager)</text>
-<text x="5" y="118" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Finance HQ</text>
-<text x="5" y="164" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">CEO / Direksi</text>
-<text x="5" y="208" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Pillar Manager / MIS</text>
-<text x="5" y="260" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">PR Approved &#8594; Buat PO</text>
-<line x1="0" y1="46" x2="1100" y2="46" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="92" x2="1100" y2="92" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="138" x2="1100" y2="138" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="184" x2="1100" y2="184" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="230" x2="1100" y2="230" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="108" y1="0" x2="108" y2="310" stroke="#C8BA90" stroke-width="1"/>
+<rect x="0" y="0" width="1200" height="46" fill="#F1EFE8"/>
+<rect x="0" y="46" width="1200" height="46" fill="#EEEDFE"/>
+<rect x="0" y="92" width="1200" height="46" fill="#FAEEDA"/>
+<rect x="0" y="138" width="1200" height="46" fill="#E6F1FB"/>
+<rect x="0" y="184" width="1200" height="46" fill="#EEEDFE"/>
+<rect x="0" y="230" width="1200" height="80" fill="#EAF3DE"/>
+<rect x="0" y="0" width="210" height="310" fill="#FFFFFF" opacity=".18"/>
+<text x="12" y="26" font-size="9.5" font-weight="700" fill="#5F5E5A" font-family="Plus Jakarta Sans">User / HOD</text>
+<text x="12" y="66" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Purchasing Manager</text>
+<text x="12" y="79" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">(PR Manager)</text>
+<text x="12" y="118" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Finance HQ</text>
+<text x="12" y="164" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">CEO / Direksi</text>
+<text x="12" y="208" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Pillar Manager / MIS</text>
+<text x="12" y="260" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">PR Approved &#8594; Buat PO</text>
+<line x1="0" y1="46" x2="1200" y2="46" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="92" x2="1200" y2="92" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="138" x2="1200" y2="138" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="184" x2="1200" y2="184" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="230" x2="1200" y2="230" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="210" y1="0" x2="210" y2="310" stroke="#C8BA90" stroke-width="1"/>
+<g transform="translate(100 0)">
 <!-- start -->
 <circle cx="130" cy="23" r="12" fill="#E8B84B" stroke="#C9962A" stroke-width="1.5"/>
 <text x="130" y="28" text-anchor="middle" font-size="8" font-weight="700" fill="#1A1410" font-family="Plus Jakarta Sans">PR</text>
@@ -405,8 +435,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <text x="184" y="21" text-anchor="middle" font-size="8.5" fill="#633806" font-weight="700" font-family="Plus Jakarta Sans">PR</text>
 <text x="184" y="32" text-anchor="middle" font-size="8.5" fill="#633806" font-family="Plus Jakarta Sans">Type</text>
 <!-- T3 OPEX Local -->
-<line x1="212" y1="23" x2="250" y2="23" stroke="#9A9080" stroke-width="1.5" marker-end="url(#bh)"/>
-<text x="230" y="16" text-anchor="middle" font-size="7.5" fill="#3B6D11" font-family="Plus Jakarta Sans">Opex Local</text>
+<text x="252" y="15" text-anchor="middle" font-size="7.5" fill="#3B6D11" font-family="Plus Jakarta Sans">Opex Local</text>
 <g class="cn" onclick="det('t3')">
 <rect x="250" y="54" width="108" height="32" rx="5" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
 <text x="304" y="68" text-anchor="middle" font-size="10.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">TAM-3</text>
@@ -415,9 +444,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <line x1="212" y1="23" x2="304" y2="23" stroke="#9A9080" stroke-width="1.5"/>
 <line x1="304" y1="23" x2="304" y2="54" stroke="#9A9080" stroke-width="1.5" marker-end="url(#bh)"/>
 <!-- T4 OPEX Import -->
-<line x1="184" y1="43" x2="184" y2="70" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="184" y1="70" x2="405" y2="70" stroke="#9A9080" stroke-width="1.5" marker-end="url(#bh)"/>
-<text x="294" y="82" text-anchor="middle" font-size="7.5" fill="#854F0B" font-family="Plus Jakarta Sans">Import / CAPEX / Marketing / IT</text>
+<line x1="184" y1="43" x2="184" y2="104" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="184" y1="104" x2="380" y2="104" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="380" y1="104" x2="380" y2="70" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="380" y1="70" x2="405" y2="70" stroke="#9A9080" stroke-width="1.5" marker-end="url(#bh)"/>
+<text x="300" y="118" text-anchor="middle" font-size="7.5" fill="#854F0B" font-family="Plus Jakarta Sans">Import / CAPEX / Marketing / IT</text>
 <g class="cn" onclick="det('t4')">
 <rect x="405" y="54" width="108" height="32" rx="5" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
 <text x="459" y="68" text-anchor="middle" font-size="10.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">TAM-4</text>
@@ -431,7 +462,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </g>
 <line x1="513" y1="70" x2="609" y2="70" stroke="#9A9080" stroke-width="1.5"/>
 <line x1="609" y1="70" x2="609" y2="100" stroke="#9A9080" stroke-width="1.5" marker-end="url(#bh)"/>
-<text x="560" y="63" text-anchor="middle" font-size="7.5" fill="#854F0B" font-family="Plus Jakarta Sans">CAPEX</text>
+<text x="560" y="58" text-anchor="middle" font-size="7.5" fill="#854F0B" font-family="Plus Jakarta Sans">CAPEX</text>
 <!-- T6 Marketing -->
 <g class="cn" onclick="det('t6')">
 <rect x="700" y="192" width="115" height="32" rx="5" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
@@ -440,7 +471,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </g>
 <line x1="513" y1="70" x2="757" y2="70" stroke="#9A9080" stroke-width="1.5"/>
 <line x1="757" y1="70" x2="757" y2="192" stroke="#9A9080" stroke-width="1.5" marker-end="url(#bh)"/>
-<text x="635" y="63" text-anchor="middle" font-size="7.5" fill="#534AB7" font-family="Plus Jakarta Sans">Marketing</text>
+<text x="690" y="58" text-anchor="middle" font-size="7.5" fill="#534AB7" font-family="Plus Jakarta Sans">Marketing</text>
 <!-- T7 IT -->
 <g class="cn" onclick="det('t7')">
 <rect x="860" y="192" width="108" height="32" rx="5" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
@@ -449,21 +480,19 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </g>
 <line x1="513" y1="70" x2="914" y2="70" stroke="#9A9080" stroke-width="1.5"/>
 <line x1="914" y1="70" x2="914" y2="192" stroke="#9A9080" stroke-width="1.5" marker-end="url(#bh)"/>
-<text x="790" y="63" text-anchor="middle" font-size="7.5" fill="#534AB7" font-family="Plus Jakarta Sans">IT Infra</text>
+<text x="848" y="58" text-anchor="middle" font-size="7.5" fill="#534AB7" font-family="Plus Jakarta Sans">IT Infra</text>
 <!-- all converge to PR Approved -->
-<line x1="304" y1="86" x2="304" y2="258" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="459" y1="86" x2="459" y2="252" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="609" y1="132" x2="609" y2="256" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="757" y1="224" x2="757" y2="250" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="914" y1="224" x2="914" y2="246" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="304" y1="258" x2="380" y2="258" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="459" y1="252" x2="380" y2="252" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="609" y1="256" x2="380" y2="256" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="757" y1="250" x2="380" y2="250" stroke="#9A9080" stroke-width="1.5"/>
-<line x1="914" y1="246" x2="380" y2="246" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="304" y1="86" x2="304" y2="286" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="459" y1="86" x2="459" y2="286" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="609" y1="132" x2="609" y2="286" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="757" y1="224" x2="757" y2="286" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="914" y1="224" x2="914" y2="286" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="304" y1="286" x2="914" y2="286" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="440" y1="286" x2="440" y2="274" stroke="#9A9080" stroke-width="1.5" marker-end="url(#bh)"/>
 <rect x="380" y="238" width="120" height="36" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="2"/>
 <text x="440" y="254" text-anchor="middle" font-size="11" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">PR Approved</text>
 <text x="440" y="266" text-anchor="middle" font-size="8.5" fill="#3B6D11" font-family="Plus Jakarta Sans">&#8594; Create PO</text>
+</g>
 </svg>
 </div>
 </div>
@@ -475,23 +504,26 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="sw">
 <div class="sw-hdr"><h3>PO Approval — TAM-8A, TAM-8B, TAM-9</h3><span>3 jalur berdasarkan amount &amp; currency</span></div>
 <div class="svg-wrap">
-<svg viewBox="0 0 1020 270" xmlns="http://www.w3.org/2000/svg" style="min-width:800px;width:100%">
+<svg viewBox="0 0 1120 270" xmlns="http://www.w3.org/2000/svg" style="min-width:900px;width:100%">
 <defs><marker id="ch" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-<rect x="0" y="0" width="1020" height="52" fill="#EEEDFE"/>
-<rect x="0" y="52" width="1020" height="52" fill="#FAEEDA"/>
-<rect x="0" y="104" width="1020" height="52" fill="#FAEEDA"/>
-<rect x="0" y="156" width="1020" height="52" fill="#E6F1FB"/>
-<rect x="0" y="208" width="1020" height="62" fill="#EAF3DE"/>
-<text x="5" y="30" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Branch Manager / Purchasing</text>
-<text x="5" y="82" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Cost Controller</text>
-<text x="5" y="130" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Accounting Manager / Finance HQ</text>
-<text x="5" y="182" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">CEO / Direksi</text>
-<text x="5" y="238" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">PO Confirmed &#8594; GR</text>
-<line x1="0" y1="52" x2="1020" y2="52" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="104" x2="1020" y2="104" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="156" x2="1020" y2="156" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="208" x2="1020" y2="208" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="108" y1="0" x2="108" y2="270" stroke="#C8BA90" stroke-width="1"/>
+<rect x="0" y="0" width="1120" height="52" fill="#EEEDFE"/>
+<rect x="0" y="52" width="1120" height="52" fill="#FAEEDA"/>
+<rect x="0" y="104" width="1120" height="52" fill="#FAEEDA"/>
+<rect x="0" y="156" width="1120" height="52" fill="#E6F1FB"/>
+<rect x="0" y="208" width="1120" height="62" fill="#EAF3DE"/>
+<rect x="0" y="0" width="210" height="270" fill="#FFFFFF" opacity=".18"/>
+<text x="12" y="30" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Branch Manager / Purchasing</text>
+<text x="12" y="82" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Cost Controller</text>
+<text x="12" y="124" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Accounting Manager /</text>
+<text x="12" y="137" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Finance HQ</text>
+<text x="12" y="182" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">CEO / Direksi</text>
+<text x="12" y="238" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">PO Confirmed &#8594; GR</text>
+<line x1="0" y1="52" x2="1120" y2="52" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="104" x2="1120" y2="104" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="156" x2="1120" y2="156" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="208" x2="1120" y2="208" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="210" y1="0" x2="210" y2="270" stroke="#C8BA90" stroke-width="1"/>
+<g transform="translate(100 0)">
 <!-- PO in -->
 <circle cx="130" cy="26" r="12" fill="#E8B84B" stroke="#C9962A" stroke-width="1.5"/>
 <text x="130" y="31" text-anchor="middle" font-size="8" font-weight="700" fill="#1A1410" font-family="Plus Jakarta Sans">PO</text>
@@ -539,6 +571,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <rect x="480" y="220" width="120" height="36" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="2"/>
 <text x="540" y="236" text-anchor="middle" font-size="11" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">PO Confirmed</text>
 <text x="540" y="248" text-anchor="middle" font-size="8.5" fill="#3B6D11" font-family="Plus Jakarta Sans">&#8594; GR / Receive</text>
+</g>
 </svg>
 </div>
 </div>
@@ -550,20 +583,22 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="sw">
 <div class="sw-hdr"><h3>Goods Receipt — Penerimaan Barang (1-step)</h3><span>Supplier &#8594; BRANCH/Stock + AVCO perpetual update + jurnal otomatis</span></div>
 <div class="svg-wrap">
-<svg viewBox="0 0 900 195" xmlns="http://www.w3.org/2000/svg" style="min-width:700px;width:100%">
+<svg viewBox="0 0 1000 195" xmlns="http://www.w3.org/2000/svg" style="min-width:800px;width:100%">
 <defs><marker id="dh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-<rect x="0" y="0" width="900" height="48" fill="#EEEDFE"/>
-<rect x="0" y="48" width="900" height="48" fill="#EAF3DE"/>
-<rect x="0" y="96" width="900" height="48" fill="#FAEEDA"/>
-<rect x="0" y="144" width="900" height="51" fill="#E1F5EE"/>
-<text x="5" y="28" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Purchasing / Receiving Staff</text>
-<text x="5" y="76" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">Warehouse / Inventory</text>
-<text x="5" y="124" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Finance / Accounting</text>
-<text x="5" y="172" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem Odoo (Auto)</text>
-<line x1="0" y1="48" x2="900" y2="48" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="96" x2="900" y2="96" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="144" x2="900" y2="144" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="108" y1="0" x2="108" y2="195" stroke="#C8BA90" stroke-width="1"/>
+<rect x="0" y="0" width="1000" height="48" fill="#EEEDFE"/>
+<rect x="0" y="48" width="1000" height="48" fill="#EAF3DE"/>
+<rect x="0" y="96" width="1000" height="48" fill="#FAEEDA"/>
+<rect x="0" y="144" width="1000" height="51" fill="#E1F5EE"/>
+<rect x="0" y="0" width="210" height="195" fill="#FFFFFF" opacity=".18"/>
+<text x="12" y="28" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Purchasing / Receiving Staff</text>
+<text x="12" y="76" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">Warehouse / Inventory</text>
+<text x="12" y="124" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Finance / Accounting</text>
+<text x="12" y="172" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem Odoo (Auto)</text>
+<line x1="0" y1="48" x2="1000" y2="48" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="96" x2="1000" y2="96" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="144" x2="1000" y2="144" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="210" y1="0" x2="210" y2="195" stroke="#C8BA90" stroke-width="1"/>
+<g transform="translate(100 0)">
 <!-- flow -->
 <circle cx="130" cy="24" r="12" fill="#E8B84B" stroke="#C9962A" stroke-width="1.5"/>
 <text x="130" y="29" text-anchor="middle" font-size="8" font-weight="700" fill="#1A1410" font-family="Plus Jakarta Sans">PO</text>
@@ -616,6 +651,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <line x1="630" y1="166" x2="654" y2="166" stroke="#9A9080" stroke-width="1.5" marker-end="url(#dh)"/>
 <circle cx="672" cy="166" r="13" fill="#3B6D11" stroke="#27500A" stroke-width="2"/>
 <circle cx="672" cy="166" r="8" fill="white"/>
+</g>
 </svg>
 </div>
 </div>
@@ -627,20 +663,22 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="sw">
 <div class="sw-hdr"><h3>MC / SRS — Mutasi Cabang (JKT &#8594; Branch)</h3><span>2-step: JKT/Stock &#8594; Virtual/Intransit &#8594; BRANCH/Stock &nbsp;|&nbsp; Aturan: Branch ke Branch DILARANG</span></div>
 <div class="svg-wrap">
-<svg viewBox="0 0 1050 225" xmlns="http://www.w3.org/2000/svg" style="min-width:820px;width:100%">
+<svg viewBox="0 0 1150 225" xmlns="http://www.w3.org/2000/svg" style="min-width:920px;width:100%">
 <defs><marker id="eh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-<rect x="0" y="0" width="1050" height="52" fill="#EEEDFE"/>
-<rect x="0" y="52" width="1050" height="52" fill="#FAECE7"/>
-<rect x="0" y="104" width="1050" height="52" fill="#EAF3DE"/>
-<rect x="0" y="156" width="1050" height="69" fill="#E1F5EE"/>
+<rect x="0" y="0" width="1150" height="52" fill="#EEEDFE"/>
+<rect x="0" y="52" width="1150" height="52" fill="#FAECE7"/>
+<rect x="0" y="104" width="1150" height="52" fill="#EAF3DE"/>
+<rect x="0" y="156" width="1150" height="69" fill="#E1F5EE"/>
+<rect x="0" y="0" width="210" height="225" fill="#FFFFFF" opacity=".18"/>
 <text x="5" y="30" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">JKT Warehouse Manager</text>
 <text x="5" y="82" font-size="9.5" font-weight="700" fill="#993C1D" font-family="Plus Jakarta Sans">Virtual/Intransit (Perjalanan)</text>
 <text x="5" y="132" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">Branch Tujuan — Warehouse Staff</text>
 <text x="5" y="185" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem — Jurnal &amp; PO Trucking</text>
-<line x1="0" y1="52" x2="1050" y2="52" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="104" x2="1050" y2="104" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="156" x2="1050" y2="156" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="108" y1="0" x2="108" y2="225" stroke="#C8BA90" stroke-width="1"/>
+<line x1="0" y1="52" x2="1150" y2="52" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="104" x2="1150" y2="104" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="156" x2="1150" y2="156" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="210" y1="0" x2="210" y2="225" stroke="#C8BA90" stroke-width="1"/>
+<g transform="translate(100 0)">
 <!-- flow -->
 <circle cx="130" cy="26" r="12" fill="#E8B84B" stroke="#C9962A" stroke-width="1.5"/>
 <text x="130" y="31" text-anchor="middle" font-size="8" font-weight="700" fill="#1A1410" font-family="Plus Jakarta Sans">MC</text>
@@ -690,6 +728,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <text x="262" y="177" text-anchor="middle" font-size="9.5" font-weight="700" fill="#5F5E5A" font-family="Plus Jakarta Sans">Aturan Transfer</text>
 <text x="172" y="191" font-size="8.5" fill="#3B6D11" font-family="Plus Jakarta Sans">&#10004; JKT &#8594; Branch: OK (MC)</text>
 <text x="172" y="203" font-size="8.5" fill="#A32D2D" font-family="Plus Jakarta Sans">&#10008; Branch &#8594; Branch: DILARANG</text>
+</g>
 </svg>
 </div>
 </div>
@@ -701,17 +740,20 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="sw">
 <div class="sw-hdr"><h3>PG — Pindah Gudang (1-step, dalam 1 warehouse)</h3><span>BRANCH/Stock &#8594; BRANCH/Stock &nbsp;—&nbsp; tanpa Virtual/Intransit</span></div>
 <div class="svg-wrap">
-<svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg" style="min-width:640px;width:100%">
+<svg viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg" style="min-width:760px;width:100%">
 <defs><marker id="fh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-<rect x="0" y="0" width="800" height="50" fill="#EEEDFE"/>
-<rect x="0" y="50" width="800" height="50" fill="#EAF3DE"/>
-<rect x="0" y="100" width="800" height="60" fill="#E1F5EE"/>
-<text x="5" y="28" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Branch Manager / Warehouse Staff</text>
-<text x="5" y="78" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">Gudang Asal &#8594; Gudang Tujuan</text>
-<text x="5" y="128" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem (Auto)</text>
-<line x1="0" y1="50" x2="800" y2="50" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="100" x2="800" y2="100" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="108" y1="0" x2="108" y2="160" stroke="#C8BA90" stroke-width="1"/>
+<rect x="0" y="0" width="900" height="50" fill="#EEEDFE"/>
+<rect x="0" y="50" width="900" height="50" fill="#EAF3DE"/>
+<rect x="0" y="100" width="900" height="60" fill="#E1F5EE"/>
+<rect x="0" y="0" width="210" height="160" fill="#FFFFFF" opacity=".18"/>
+<text x="12" y="23" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Branch Manager /</text>
+<text x="12" y="36" font-size="9.5" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">Warehouse Staff</text>
+<text x="12" y="78" font-size="9.5" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">Gudang Asal &#8594; Gudang Tujuan</text>
+<text x="12" y="128" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem (Auto)</text>
+<line x1="0" y1="50" x2="900" y2="50" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="100" x2="900" y2="100" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="210" y1="0" x2="210" y2="160" stroke="#C8BA90" stroke-width="1"/>
+<g transform="translate(100 0)">
 <circle cx="130" cy="25" r="12" fill="#E8B84B" stroke="#C9962A" stroke-width="1.5"/>
 <text x="130" y="30" text-anchor="middle" font-size="8" font-weight="700" fill="#1A1410" font-family="Plus Jakarta Sans">PG</text>
 <line x1="142" y1="25" x2="162" y2="25" stroke="#9A9080" stroke-width="1.5" marker-end="url(#fh)"/>
@@ -739,6 +781,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <text x="520" y="56" font-size="9" fill="#A32D2D" font-family="Plus Jakarta Sans">&#10008; Branch A &#8594; Branch B: DILARANG</text>
 <text x="520" y="70" font-size="9" fill="#A32D2D" font-family="Plus Jakarta Sans">&#10008; Branch &#8594; JKT: DILARANG</text>
 <text x="520" y="82" font-size="9" fill="#993C1D" font-family="Plus Jakarta Sans">Semua replenishment wajib via JKT/Stock</text>
+</g>
 </svg>
 </div>
 </div>
@@ -750,20 +793,23 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="sw">
 <div class="sw-hdr"><h3>Invoice &amp; Payment — AP Process</h3><span>3-way match &#8594; Vendor Bill &#8594; Payment (IDR/USD) &#8594; FX Realized jika USD</span></div>
 <div class="svg-wrap">
-<svg viewBox="0 0 950 195" xmlns="http://www.w3.org/2000/svg" style="min-width:740px;width:100%">
+<svg viewBox="0 0 1050 195" xmlns="http://www.w3.org/2000/svg" style="min-width:820px;width:100%">
 <defs><marker id="gh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
-<rect x="0" y="0" width="950" height="48" fill="#FBEAF0"/>
-<rect x="0" y="48" width="950" height="48" fill="#FAEEDA"/>
-<rect x="0" y="96" width="950" height="48" fill="#E6F1FB"/>
-<rect x="0" y="144" width="950" height="51" fill="#E1F5EE"/>
-<text x="5" y="27" font-size="9.5" font-weight="700" fill="#993556" font-family="Plus Jakarta Sans">Finance / Accounting</text>
-<text x="5" y="75" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Accounting Manager</text>
-<text x="5" y="123" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">Finance HQ (Payment)</text>
-<text x="5" y="172" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem Odoo (Auto)</text>
-<line x1="0" y1="48" x2="950" y2="48" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="96" x2="950" y2="96" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="0" y1="144" x2="950" y2="144" stroke="#DDD0B0" stroke-width="0.5"/>
-<line x1="108" y1="0" x2="108" y2="195" stroke="#C8BA90" stroke-width="1"/>
+<rect x="0" y="0" width="1050" height="48" fill="#FBEAF0"/>
+<rect x="0" y="48" width="1050" height="48" fill="#FAEEDA"/>
+<rect x="0" y="96" width="1050" height="48" fill="#E6F1FB"/>
+<rect x="0" y="144" width="1050" height="51" fill="#E1F5EE"/>
+<rect x="0" y="0" width="190" height="195" fill="#FFFFFF" opacity=".18"/>
+<text x="12" y="27" font-size="9.5" font-weight="700" fill="#993556" font-family="Plus Jakarta Sans">Finance / Accounting</text>
+<text x="12" y="75" font-size="9.5" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">Accounting Manager</text>
+<text x="12" y="119" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">Finance HQ</text>
+<text x="12" y="132" font-size="9.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">(Payment)</text>
+<text x="12" y="172" font-size="9.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Sistem Odoo (Auto)</text>
+<line x1="0" y1="48" x2="1050" y2="48" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="96" x2="1050" y2="96" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="144" x2="1050" y2="144" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="190" y1="0" x2="190" y2="195" stroke="#C8BA90" stroke-width="1"/>
+<g transform="translate(100 0)">
 <circle cx="130" cy="24" r="12" fill="#E8B84B" stroke="#C9962A" stroke-width="1.5"/>
 <text x="130" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="#1A1410" font-family="Plus Jakarta Sans">GR</text>
 <text x="130" y="31" text-anchor="middle" font-size="8" font-weight="700" fill="#1A1410" font-family="Plus Jakarta Sans">Done</text>
@@ -793,22 +839,23 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <text x="573" y="69" text-anchor="middle" font-size="10.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">Payment IDR</text>
 <text x="573" y="80" text-anchor="middle" font-size="8.5" fill="#185FA5" font-family="Plus Jakarta Sans">JBSP-PUR-LOCAL</text>
 </g>
-<line x1="460" y1="91" x2="460" y2="119" stroke="#9A9080" stroke-width="1.5" marker-end="url(#gh)"/>
-<text x="472" y="109" font-size="7.5" fill="#185FA5" font-family="Plus Jakarta Sans">USD</text>
+<line x1="460" y1="91" x2="460" y2="106" stroke="#9A9080" stroke-width="1.5" marker-end="url(#gh)"/>
+<text x="476" y="101" font-size="7.5" fill="#185FA5" font-family="Plus Jakarta Sans">USD</text>
 <g class="cn" onclick="det('pay2')">
-<rect x="410" y="106" width="118" height="34" rx="5" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
-<text x="469" y="121" text-anchor="middle" font-size="10.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">Payment USD</text>
-<text x="469" y="132" text-anchor="middle" font-size="8.5" fill="#185FA5" font-family="Plus Jakarta Sans">JBSP-PUR-IMPORT</text>
+<rect x="401" y="106" width="118" height="34" rx="5" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+<text x="460" y="121" text-anchor="middle" font-size="10.5" font-weight="700" fill="#185FA5" font-family="Plus Jakarta Sans">Payment USD</text>
+<text x="460" y="132" text-anchor="middle" font-size="8.5" fill="#185FA5" font-family="Plus Jakarta Sans">JBSP-PUR-IMPORT</text>
 </g>
-<line x1="469" y1="140" x2="469" y2="150" stroke="#9A9080" stroke-width="1.5" marker-end="url(#gh)"/>
-<rect x="410" y="150" width="118" height="34" rx="5" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
-<text x="469" y="165" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">FX Realized</text>
-<text x="469" y="176" text-anchor="middle" font-size="8.5" fill="#0F6E56" font-family="Plus Jakarta Sans">akun 71001 auto</text>
+<line x1="460" y1="140" x2="460" y2="150" stroke="#9A9080" stroke-width="1.5" marker-end="url(#gh)"/>
+<rect x="401" y="150" width="118" height="34" rx="5" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<text x="460" y="165" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">FX Realized</text>
+<text x="460" y="176" text-anchor="middle" font-size="8.5" fill="#0F6E56" font-family="Plus Jakarta Sans">COA 71001 auto</text>
 <line x1="573" y1="88" x2="573" y2="167" stroke="#9A9080" stroke-width="1.5"/>
 <line x1="573" y1="167" x2="650" y2="167" stroke="#9A9080" stroke-width="1.5" marker-end="url(#gh)"/>
-<line x1="528" y1="167" x2="550" y2="167" stroke="#9A9080" stroke-width="1.5"/>
+<line x1="519" y1="167" x2="550" y2="167" stroke="#9A9080" stroke-width="1.5"/>
 <circle cx="668" cy="167" r="13" fill="#3B6D11" stroke="#27500A" stroke-width="2"/>
 <circle cx="668" cy="167" r="8" fill="white"/>
+</g>
 </svg>
 </div>
 </div>
@@ -820,7 +867,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <div class="sw">
 <div class="sw-hdr"><h3>China Import — Lead Time Tracking (fortress_china_lead_time)</h3><span>6 states: ordered &#8594; wip &#8594; ready_china &#8594; shipped &#8594; customs &#8594; received</span></div>
 <div class="svg-wrap">
-<svg viewBox="0 0 1050 178" xmlns="http://www.w3.org/2000/svg" style="min-width:820px;width:100%">
+<svg viewBox="0 0 1110 178" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
 <defs><marker id="hh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
 <rect x="0" y="0" width="1050" height="52" fill="#EEEDFE"/>
 <rect x="0" y="52" width="1050" height="52" fill="#FDF3DC"/>
@@ -885,6 +932,78 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 <text x="880" y="50" font-size="8.5" fill="#6B5A3E" font-family="Plus Jakarta Sans">x_date_shipped</text>
 <text x="880" y="62" font-size="8.5" fill="#6B5A3E" font-family="Plus Jakarta Sans">x_date_arrival_est</text>
 <text x="880" y="74" font-size="8.5" fill="#6B5A3E" font-family="Plus Jakarta Sans">x_china_state</text>
+</svg>
+<svg viewBox="0 0 1110 178" xmlns="http://www.w3.org/2000/svg" style="min-width:900px;width:100%">
+<defs><marker id="hh2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#9A9080" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+<rect x="0" y="0" width="1110" height="52" fill="#EEEDFE"/>
+<rect x="0" y="52" width="1110" height="52" fill="#FDF3DC"/>
+<rect x="0" y="104" width="1110" height="74" fill="#E1F5EE"/>
+<rect x="0" y="0" width="170" height="178" fill="#FFFFFF" opacity=".22"/>
+<line x1="0" y1="52" x2="1110" y2="52" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="0" y1="104" x2="1110" y2="104" stroke="#DDD0B0" stroke-width="0.5"/>
+<line x1="170" y1="0" x2="170" y2="178" stroke="#C8BA90" stroke-width="1"/>
+<text x="8" y="21" font-size="9.2" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">
+  <tspan x="8" dy="0">Purchasing Import Staff</tspan>
+  <tspan x="8" dy="11">(Azira)</tspan>
+</text>
+<text x="8" y="73" font-size="9.2" font-weight="700" fill="#633806" font-family="Plus Jakarta Sans">
+  <tspan x="8" dy="0">Virtual Locations</tspan>
+  <tspan x="8" dy="11">China Tracking</tspan>
+</text>
+<text x="8" y="125" font-size="9.2" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">
+  <tspan x="8" dy="0">Sistem</tspan>
+  <tspan x="8" dy="11">Scheduled Action Harian</tspan>
+</text>
+<circle cx="190" cy="26" r="12" fill="#E8B84B" stroke="#C9962A" stroke-width="1.5"/>
+<text x="190" y="31" text-anchor="middle" font-size="8" font-weight="700" fill="#1A1410" font-family="Plus Jakarta Sans">PO</text>
+<line x1="202" y1="26" x2="222" y2="26" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="222" y="8" width="88" height="34" rx="5" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5"/>
+<text x="266" y="23" text-anchor="middle" font-size="10" font-weight="700" fill="#534AB7" font-family="Plus Jakarta Sans">ordered</text>
+<text x="266" y="34" text-anchor="middle" font-size="8.5" fill="#534AB7" font-family="Plus Jakarta Sans">PO confirmed</text>
+<line x1="310" y1="26" x2="330" y2="26" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="330" y="8" width="88" height="34" rx="5" fill="#FDF3DC" stroke="#C9962A" stroke-width="1.5"/>
+<text x="374" y="23" text-anchor="middle" font-size="10" font-weight="700" fill="#633806" font-family="Plus Jakarta Sans">wip</text>
+<text x="374" y="34" text-anchor="middle" font-size="8.5" fill="#C9962A" font-family="Plus Jakarta Sans">Produksi China</text>
+<line x1="418" y1="26" x2="438" y2="26" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="438" y="8" width="95" height="34" rx="5" fill="#FDF3DC" stroke="#C9962A" stroke-width="1.5"/>
+<text x="485" y="23" text-anchor="middle" font-size="9.5" font-weight="700" fill="#633806" font-family="Plus Jakarta Sans">ready_china</text>
+<text x="485" y="34" text-anchor="middle" font-size="8.5" fill="#C9962A" font-family="Plus Jakarta Sans">Siap kirim</text>
+<line x1="533" y1="26" x2="553" y2="26" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="553" y="8" width="88" height="34" rx="5" fill="#FAECE7" stroke="#993C1D" stroke-width="1.5"/>
+<text x="597" y="23" text-anchor="middle" font-size="10" font-weight="700" fill="#993C1D" font-family="Plus Jakarta Sans">shipped</text>
+<text x="597" y="34" text-anchor="middle" font-size="8.5" fill="#993C1D" font-family="Plus Jakarta Sans">On the way</text>
+<line x1="641" y1="26" x2="661" y2="26" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="661" y="8" width="88" height="34" rx="5" fill="#FAEEDA" stroke="#854F0B" stroke-width="1.5"/>
+<text x="705" y="23" text-anchor="middle" font-size="10" font-weight="700" fill="#854F0B" font-family="Plus Jakarta Sans">customs</text>
+<text x="705" y="34" text-anchor="middle" font-size="8.5" fill="#854F0B" font-family="Plus Jakarta Sans">Bea cukai</text>
+<line x1="749" y1="26" x2="769" y2="26" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="769" y="8" width="88" height="34" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
+<text x="813" y="23" text-anchor="middle" font-size="10" font-weight="700" fill="#3B6D11" font-family="Plus Jakarta Sans">received</text>
+<text x="813" y="34" text-anchor="middle" font-size="8.5" fill="#3B6D11" font-family="Plus Jakarta Sans">GR triggered</text>
+<line x1="857" y1="26" x2="880" y2="26" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<circle cx="896" cy="26" r="13" fill="#3B6D11" stroke="#27500A" stroke-width="2"/>
+<circle cx="896" cy="26" r="8" fill="white"/>
+<line x1="266" y1="42" x2="266" y2="58" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="217" y="58" width="98" height="30" rx="5" fill="#FDF3DC" stroke="#C9962A" stroke-width="1"/>
+<text x="266" y="71" text-anchor="middle" font-size="9" font-weight="700" fill="#633806" font-family="Plus Jakarta Sans">Virtual/WIP</text>
+<text x="266" y="81" text-anchor="middle" font-size="8.5" fill="#C9962A" font-family="Plus Jakarta Sans">China</text>
+<line x1="374" y1="42" x2="374" y2="58" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="325" y="58" width="98" height="30" rx="5" fill="#FDF3DC" stroke="#C9962A" stroke-width="1"/>
+<text x="374" y="71" text-anchor="middle" font-size="9" font-weight="700" fill="#633806" font-family="Plus Jakarta Sans">Virtual/Gudang</text>
+<text x="374" y="81" text-anchor="middle" font-size="8.5" fill="#C9962A" font-family="Plus Jakarta Sans">China</text>
+<line x1="597" y1="42" x2="597" y2="58" stroke="#9A9080" stroke-width="1.5" marker-end="url(#hh2)"/>
+<rect x="548" y="58" width="98" height="30" rx="5" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+<text x="597" y="71" text-anchor="middle" font-size="9" font-weight="700" fill="#993C1D" font-family="Plus Jakarta Sans">Virtual/</text>
+<text x="597" y="81" text-anchor="middle" font-size="8.5" fill="#993C1D" font-family="Plus Jakarta Sans">In Transit</text>
+<rect x="222" y="110" width="740" height="34" rx="5" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.5"/>
+<text x="592" y="125" text-anchor="middle" font-size="10" font-weight="700" fill="#0F6E56" font-family="Plus Jakarta Sans">Scheduled Action Harian - Alert jika ETA terlewat</text>
+<text x="592" y="137" text-anchor="middle" font-size="8.5" fill="#0F6E56" font-family="Plus Jakarta Sans">Notif: Sales Admin Manager, Inventory Manager, Purchasing Import Staff, Purchasing Manager</text>
+<rect x="930" y="8" width="168" height="72" rx="6" fill="#F1EFE8" stroke="#DDD0B0" stroke-width="1"/>
+<text x="1014" y="24" text-anchor="middle" font-size="9.5" font-weight="700" fill="#5F5E5A" font-family="Plus Jakarta Sans">Tracking Fields</text>
+<text x="940" y="38" font-size="8.5" fill="#6B5A3E" font-family="Plus Jakarta Sans">x_date_ready_china</text>
+<text x="940" y="50" font-size="8.5" fill="#6B5A3E" font-family="Plus Jakarta Sans">x_date_shipped</text>
+<text x="940" y="62" font-size="8.5" fill="#6B5A3E" font-family="Plus Jakarta Sans">x_date_arrival_est</text>
+<text x="940" y="74" font-size="8.5" fill="#6B5A3E" font-family="Plus Jakarta Sans">x_china_state</text>
 </svg>
 </div>
 </div>
@@ -1123,8 +1242,8 @@ const DETS={
   ]},
   'pay2':{title:'Payment USD',tam:null,cards:[
     {cl:'b',lbl:'Journal',t:'JBSP-PUR-IMPORT',b:'Pembayaran via OCBC USD (JBSP-OCBC-JBS-USD). Kurs dari API harian 07.00 WIB. Selisih kurs → Realized Gain/Loss.',c:'JBSP-OCBC-JBS-USD'},
-    {cl:'t',lbl:'FX Realized',t:'Akun 71001 auto',b:'Saat payment di-reconcile dengan bill: selisih kurs antara tanggal bill dan tanggal bayar otomatis masuk akun 71001 Realized Gain/Loss.',c:'71001 Realized Gain/Loss'},
-    {cl:'a',lbl:'Unrealized',t:'Akun 71002 — akhir bulan',b:'Outstanding USD di akhir bulan di-adjust manual oleh Finance HQ sebagai Unrealized Gain/Loss (72002). Bukan auto.',c:'71002 Unrealized Gain/Loss'}
+    {cl:'t',lbl:'FX Realized',t:'COA 71001 auto',b:'Saat payment di-reconcile dengan bill: selisih kurs antara tanggal bill dan tanggal bayar otomatis masuk COA 71001 Realized Gain/Loss.',c:'71001 Realized Gain/Loss'},
+    {cl:'a',lbl:'Unrealized',t:'COA 71002 - akhir bulan',b:'Outstanding USD di akhir bulan di-adjust manual oleh Finance HQ sebagai Unrealized Gain/Loss (71002). Bukan auto.',c:'71002 Unrealized Gain/Loss'}
   ]},
   'pay':{title:'Payment Summary',tam:null,cards:[
     {cl:'b',lbl:'IDR',t:'Via BCA / OCBC IDR',b:'Journal: JBSP-PUR-LOCAL. Bank: JBSP-BCA-{BRANCH} atau JBSP-OCBC-JBS-IDR.',c:'account.payment IDR'},
