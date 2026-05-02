@@ -21,7 +21,7 @@
   --font:'Plus Jakarta Sans',sans-serif;
 }
 
-body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;min-height:100vh}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;min-height:100vh;overflow-x:hidden}
 
 /* HEADER */
 .header{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;height:60px;gap:20px;position:sticky;top:0;z-index:100}
@@ -72,7 +72,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
 
 .step-header{display:flex;align-items:center;gap:16px;padding:18px 20px}
 .step-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
-.step-info{flex:1}
+.step-info{flex:1;min-width:0}
 .step-info h3{font-size:15px;font-weight:600;margin-bottom:2px}
 .step-info p{font-size:13px;color:var(--muted)}
 .step-chevron{color:var(--dim);font-size:18px;transition:transform .2s;flex-shrink:0}
@@ -148,7 +148,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
 .progress-fill{height:100%;border-radius:4px;transition:width .3s}
 
 /* PDF LINK */
-.pdf-link{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;transition:all .2s;margin-top:8px;border:1px solid}
+.pdf-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;transition:all .2s;margin-top:8px;border:1px solid}
 .pdf-link:hover{filter:brightness(0.95)}
 .pdf-link svg{width:14px;height:14px}
 
@@ -179,10 +179,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
 
 /* RESPONSIVE */
 @media(max-width:640px){
-  .header{height:auto;align-items:flex-start;padding:12px 16px;gap:8px}
+  .header{height:auto;align-items:center;flex-wrap:wrap;padding:12px 16px;gap:6px 12px}
+  .logo{font-size:12px}
+  .header-title{flex:1;font-size:14px;text-align:right}
   .header-right{width:100%;margin-left:0;align-items:flex-start;flex-direction:column;gap:8px}
-  .view-toggle{width:100%}
-  .view-btn{flex:1}
+  .view-toggle{display:grid;width:100%;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
+  .view-btn{min-width:0;padding:8px 6px;font-size:11.5px;text-align:center}
   .actor-bar{padding:0 16px}
   .actor-tab{padding:12px 14px;font-size:12px;gap:8px}
   .actor-icon{width:28px;height:28px;font-size:12px}
@@ -190,14 +192,35 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
   .actor-hero{padding:20px;flex-direction:column;text-align:center;gap:16px}
   .actor-avatar{width:56px;height:56px;font-size:22px}
   .actor-tags{justify-content:center}
+  .step-card{border-radius:9px;margin-bottom:10px}
+  .step-header{align-items:flex-start;gap:12px;padding:14px}
+  .step-num{width:28px;height:28px;border-radius:7px;font-size:12px}
+  .step-info h3{font-size:14px;line-height:1.35}
+  .step-info p{font-size:12px;line-height:1.45}
+  .step-body{padding:0 14px 14px;overflow-x:auto}
+  .menu-path{padding:10px 12px}
   .fields-grid{grid-template-columns:1fr}
+  .alert{padding:11px 12px;font-size:12px}
+  .check-item{gap:10px}
+  .info-table{min-width:520px;font-size:12px}
+  .info-table th{padding:8px 10px;font-size:10px}
+  .info-table td{padding:9px 10px}
+  .pdf-link{width:100%;min-height:38px;text-align:center;line-height:1.35}
+  .pdf-link svg{flex:0 0 14px}
   .flow-visual{flex-direction:column;align-items:stretch}
   .flow-arrow{transform:rotate(90deg);text-align:center;padding:2px 0}
   .flow-box{width:100%}
+  .pdf-library{padding:20px 16px}
+  .pdf-grid{grid-template-columns:1fr;gap:10px;margin-top:14px}
+  .pdf-card{padding:16px}
+  .pdf-cat-title{font-size:15px;margin-top:22px}
   .flowchart-view{padding:16px}
+  .flowchart-shell{border-radius:10px}
   .flowchart-head{align-items:flex-start;flex-direction:column}
+  .flowchart-head h2{font-size:16px;line-height:1.3}
+  .flowchart-head p{font-size:12px;line-height:1.45}
   .flowchart-open{width:100%}
-  .flowchart-frame{height:calc(100vh - 190px);min-height:520px}
+  .flowchart-frame{height:calc(100svh - 178px);min-height:360px}
   .header-sub{display:none}
 }
 </style>

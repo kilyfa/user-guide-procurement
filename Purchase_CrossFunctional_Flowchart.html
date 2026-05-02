@@ -84,6 +84,69 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 /* sub-flow link indicator */
 .sf rect,.sf polygon{stroke-dasharray:5 3}
+
+.mobile-view-toggle{display:none}
+.mobile-cards{display:none}
+.diagram-view{display:block}
+.mobile-card-action{font-family:inherit}
+
+@media(max-width:700px){
+  body{overflow-x:hidden}
+  .hdr{padding:8px 12px;gap:10px}
+  .hdr img{height:34px}
+  .hdr-sep{height:30px}
+  .hdr-title{font-size:13px;line-height:1.25}
+  .hdr-sub{display:none}
+  .hdr-hint{padding:5px 8px;font-size:0}
+  .hdr-hint::before{content:"Tap node";font-size:10px}
+
+  .nav{padding:0 8px;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nb{padding:11px 12px;font-size:11.5px}
+
+  .mobile-view-toggle{position:sticky;top:51px;z-index:90;display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 10px}
+  .mvt-btn{border:1px solid var(--border);border-radius:7px;background:#fff;color:var(--text2);font:700 12px 'Plus Jakarta Sans',sans-serif;padding:9px 10px}
+  .mvt-btn.active{background:var(--dark);border-color:var(--gold);color:var(--gold-l)}
+
+  body.mobile-card-mode .diagram-view{display:none}
+  body.mobile-card-mode .mobile-cards{display:block}
+  body.mobile-diagram-mode .diagram-view{display:block}
+  body.mobile-diagram-mode .mobile-cards{display:none}
+
+  .mobile-cards{padding:12px 10px 80px}
+  .mobile-flow-head{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  .mobile-flow-head h2{font-size:15px;line-height:1.3;color:var(--text)}
+  .mobile-flow-head p{font-size:12px;line-height:1.5;color:var(--text2);margin-top:4px}
+  .mobile-flow-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  .mobile-card-top{display:flex;align-items:flex-start;gap:10px}
+  .mobile-card-no{display:flex;align-items:center;justify-content:center;min-width:30px;height:30px;border-radius:8px;background:var(--dark);color:var(--gold-l);font-size:11px;font-weight:800}
+  .mobile-card-body{min-width:0;flex:1}
+  .mobile-card-lane{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text3)}
+  .mobile-card-title{font-size:14px;font-weight:800;line-height:1.3;color:var(--text);margin-top:3px}
+  .mobile-card-summary{font-size:12px;line-height:1.5;color:var(--text2);margin-top:5px}
+  .mobile-card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .mobile-card-action{border:1px solid var(--border);border-radius:7px;background:var(--dark);color:var(--gold-l);font-size:12px;font-weight:700;padding:8px 10px}
+  .mobile-card-action.secondary{background:#fff;color:var(--text2)}
+
+  .wrap{padding:12px 10px 80px}
+  .sw{border-radius:8px;margin-bottom:12px}
+  .sw-hdr{align-items:flex-start;flex-direction:column;gap:3px;padding:10px 12px}
+  .sw-hdr h3{font-size:12.5px;line-height:1.3}
+  .sw-hdr span{font-size:10.5px;line-height:1.35}
+  .svg-wrap{position:relative;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:10px 8px 12px;background:linear-gradient(90deg,#fff 0%,#fff 88%,rgba(201,150,42,.14) 100%)}
+  .svg-wrap::before{content:"Geser horizontal untuk melihat diagram";display:block;position:sticky;left:0;width:max-content;margin-bottom:8px;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--text2);font-size:10px;font-weight:700;padding:4px 9px}
+  .svg-wrap svg{width:800px!important;min-width:800px!important;max-width:none!important}
+  .back{margin-bottom:10px;padding:8px 12px}
+
+  .fd{inset:auto 0 0 0;width:100vw;max-width:none;z-index:400}
+  .fd-inner{border-radius:14px 14px 0 0;border-left:none;border-right:none;border-bottom:none}
+  .fd-hdr{padding:12px 14px}
+  .fd-title{font-size:13px;line-height:1.35}
+  .fd-close{font-size:28px;padding:0 8px}
+  .fd-body{max-height:70vh;padding:12px 14px 18px}
+  .tam-row{gap:6px}
+  .tam-no{min-width:52px}
+}
 </style>
 </head>
 <body>
@@ -109,6 +172,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   <button class="nb" onclick="go('china')"><span class="nd" style="background:#C9962A"></span>China Import</button>
 </div>
 
+<div class="mobile-view-toggle" aria-label="Mobile flowchart view">
+  <button class="mvt-btn active" type="button" id="mobileCardsBtn" onclick="setMobileViewMode('cards')">Cards</button>
+  <button class="mvt-btn" type="button" id="mobileDiagramBtn" onclick="setMobileViewMode('diagram')">Diagram</button>
+</div>
+
+<div id="mobileCards" class="mobile-cards"></div>
+
+<div id="diagramView" class="diagram-view">
 <div class="wrap">
 
 <!-- ── MAIN FLOW ── -->
@@ -820,6 +891,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </div>
 
 </div><!-- /wrap -->
+</div><!-- /diagramView -->
 
 <!-- Floating detail -->
 <div class="fd" id="fd">
@@ -834,15 +906,123 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 
 <script>
 const PANELS=['main','pr','po','gr','mc','pg','inv','china'];
+let activePanel='main';
+let mobileFlowMode='diagram';
+
+const MOBILE_FLOWS={
+  main:{title:'Main Purchase Flow',description:'Ringkasan end-to-end dari PR sampai payment, termasuk cabang import dan movement gudang.',steps:[
+    {no:'01',lane:'User / HOD',title:'Buat PR',summary:'Requestor membuat Purchase Request sesuai kebutuhan dan tipe PR.',detail:'pr-create'},
+    {no:'02',lane:'Approval',title:'TAM Approval PR',summary:'PR masuk jalur approval sesuai pr_type sebelum diproses Purchasing.',panel:'pr'},
+    {no:'03',lane:'Purchasing',title:'RFQ & Vendor Selection',summary:'Purchasing meminta quotation dan membandingkan vendor sebelum PO dibuat.',detail:'rfq'},
+    {no:'04',lane:'Purchasing',title:'Create PO',summary:'PO dibuat dari PR/RFQ yang sudah lolos dan siap masuk approval PO.',detail:'po-c'},
+    {no:'05',lane:'Approval',title:'TAM Approval PO',summary:'PO mengikuti approval berdasarkan amount dan currency.',panel:'po'},
+    {no:'06',lane:'Warehouse',title:'GR / Receive',summary:'Barang diterima, stok bertambah, dan valuation otomatis dibuat.',panel:'gr'},
+    {no:'07',lane:'Accounting',title:'Vendor Bill',summary:'Invoice vendor dicocokkan dengan PO dan receipt sebelum payment.',panel:'inv'},
+    {no:'08',lane:'Finance',title:'Payment',summary:'Payment IDR atau USD diproses sesuai journal, term, dan kurs.',detail:'pay'}
+  ]},
+  pr:{title:'PR Approval',description:'Jalur TAM-3 sampai TAM-7 berdasarkan tipe Purchase Request.',steps:[
+    {no:'T3',lane:'PR Manager',title:'OPEX Local',summary:'PR lokal cukup melewati satu step approval PR Manager.',detail:'t3'},
+    {no:'T4',lane:'PR Manager + Finance HQ',title:'OPEX Import',summary:'Import memerlukan validasi Finance HQ karena ada exposure valas.',detail:'t4'},
+    {no:'T5',lane:'PR Manager + Finance HQ + CEO',title:'CAPEX',summary:'Pembelian aset tetap perlu approval sampai Direksi.',detail:'t5'},
+    {no:'T6',lane:'PR Manager + Pillar Manager',title:'Marketing',summary:'Pillar Manager mengontrol budget marketing terkait.',detail:'t6'},
+    {no:'T7',lane:'PR Manager + MIS',title:'IT Infra',summary:'MIS menjadi gatekeeper teknis untuk hardware, software, dan jaringan.',detail:'t7'}
+  ]},
+  po:{title:'PO Approval',description:'Jalur PO berdasarkan nominal dan currency transaksi.',steps:[
+    {no:'8A',lane:'Branch + Finance',title:'PO IDR < Rp 50jt',summary:'Approval berjenjang sampai Finance Manager untuk PO IDR di bawah threshold.',detail:'t8a'},
+    {no:'8B',lane:'Branch + Finance + CEO',title:'PO IDR >= Rp 50jt',summary:'PO IDR di atas threshold wajib masuk approval Direksi.',detail:'t8b'},
+    {no:'T9',lane:'Import Staff + Finance HQ',title:'PO USD Import',summary:'PO USD import diproses oleh PIC import dan Finance HQ untuk kontrol kurs.',detail:'t9'}
+  ]},
+  gr:{title:'Goods Receipt',description:'Penerimaan barang, update AVCO, dan jurnal stok otomatis.',steps:[
+    {no:'01',lane:'Warehouse',title:'Terima Barang',summary:'Gudang validate receipt sesuai PO dan kondisi fisik barang.',detail:'gr1'},
+    {no:'02',lane:'System',title:'Stock Valuation',summary:'Odoo mencatat stok dan interim account secara otomatis.',detail:'gr1'},
+    {no:'03',lane:'Finance',title:'3-Way Match',summary:'PO, GR, dan Vendor Bill menjadi dasar validasi invoice.',detail:'gr2'}
+  ]},
+  mc:{title:'MC / SRS',description:'Mutasi cabang dari JKT ke branch via Virtual/Intransit.',steps:[
+    {no:'01',lane:'Inventory',title:'Buat MC Order',summary:'Dokumen MCOUT/MCIN dibuat dengan sequence cabang.',detail:'mc1'},
+    {no:'02',lane:'Purchasing',title:'PO Trucking G-11',summary:'Biaya trucking dikaitkan ke MC Picking dan analytic branch tujuan.',detail:'truck'},
+    {no:'03',lane:'JKT Warehouse',title:'Picking 1: OUT',summary:'Barang keluar dari JKT dan masuk Virtual/Intransit.',detail:'mc2'},
+    {no:'04',lane:'Branch Warehouse',title:'Picking 2: IN',summary:'Branch menerima barang, Intransit berkurang, stok cabang bertambah.',detail:'mc3'}
+  ]},
+  pg:{title:'PG Pindah Gudang',description:'Pindah gudang 1-step dalam warehouse yang sama tanpa Virtual/Intransit.',steps:[
+    {no:'01',lane:'Inventory',title:'Buat Transfer PG',summary:'User membuat transfer internal antar lokasi dalam satu warehouse.'},
+    {no:'02',lane:'Warehouse',title:'Validate Movement',summary:'Barang berpindah lokasi internal tanpa dokumen MC dan tanpa Intransit.'},
+    {no:'03',lane:'System',title:'Stock Updated',summary:'Qty lokasi asal berkurang dan lokasi tujuan bertambah otomatis.'}
+  ]},
+  inv:{title:'Invoice & Payment',description:'Proses AP dari vendor invoice sampai payment dan selisih kurs.',steps:[
+    {no:'01',lane:'Accounting',title:'Terima Invoice',summary:'Finance membuat vendor bill dari PO yang sudah diterima.',detail:'inv1'},
+    {no:'02',lane:'Accounting Manager',title:'3-Way Match',summary:'Qty dan amount dicocokkan antara PO, GR, dan Vendor Bill.',detail:'inv2'},
+    {no:'03',lane:'Finance',title:'Payment IDR',summary:'Pembayaran IDR menggunakan journal lokal dan payment term vendor.',detail:'pay1'},
+    {no:'04',lane:'Finance HQ',title:'Payment USD',summary:'Pembayaran USD menangani kurs dan realized gain/loss.',detail:'pay2'}
+  ]},
+  china:{title:'China Import',description:'Tracking lead time import dari ordered sampai received.',steps:[
+    {no:'01',lane:'Import Staff',title:'ordered',summary:'PO import sudah confirmed dan masuk monitoring China.'},
+    {no:'02',lane:'China Tracking',title:'wip',summary:'Barang berada pada tahap produksi atau persiapan supplier.'},
+    {no:'03',lane:'China Tracking',title:'ready_china',summary:'Barang siap dikirim dari China.'},
+    {no:'04',lane:'Logistics',title:'shipped',summary:'Barang dalam perjalanan dan dipantau ETA-nya.'},
+    {no:'05',lane:'Customs',title:'customs',summary:'Barang masuk proses bea cukai sebelum diterima.'},
+    {no:'06',lane:'Warehouse',title:'received',summary:'Barang diterima dan proses GR dapat dijalankan.',panel:'gr'}
+  ]}
+};
+
 function go(n){
+  activePanel=n;
   PANELS.forEach(p=>{
     document.getElementById('p-'+p).classList.toggle('active',p===n);
     document.querySelectorAll('.nb')[PANELS.indexOf(p)].classList.toggle('active',p===n);
   });
+  renderMobileCards(n);
   cfd();
-  window.scrollTo({top:60,behavior:'smooth'});
+  window.scrollTo({top:isMobileLayout()?0:60,behavior:'smooth'});
 }
 function cfd(){document.getElementById('fd').style.display='none';}
+
+function isMobileLayout(){
+  return window.matchMedia('(max-width: 700px)').matches;
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+function setMobileViewMode(mode){
+  mobileFlowMode=mode;
+  document.body.classList.toggle('mobile-card-mode',mode==='cards');
+  document.body.classList.toggle('mobile-diagram-mode',mode==='diagram');
+  document.getElementById('mobileCardsBtn')?.classList.toggle('active',mode==='cards');
+  document.getElementById('mobileDiagramBtn')?.classList.toggle('active',mode==='diagram');
+  renderMobileCards(activePanel);
+}
+
+function renderMobileCards(panelId=activePanel){
+  const root=document.getElementById('mobileCards');
+  if(!root)return;
+  const flow=MOBILE_FLOWS[panelId]||MOBILE_FLOWS.main;
+  root.innerHTML=`
+    <section class="mobile-flow-head">
+      <h2>${escapeHtml(flow.title)}</h2>
+      <p>${escapeHtml(flow.description)}</p>
+    </section>
+    ${flow.steps.map(step=>`
+      <article class="mobile-flow-card">
+        <div class="mobile-card-top">
+          <div class="mobile-card-no">${escapeHtml(step.no)}</div>
+          <div class="mobile-card-body">
+            <div class="mobile-card-lane">${escapeHtml(step.lane)}</div>
+            <div class="mobile-card-title">${escapeHtml(step.title)}</div>
+            <div class="mobile-card-summary">${escapeHtml(step.summary)}</div>
+            ${(step.detail||step.panel)?`
+              <div class="mobile-card-actions">
+                ${step.detail?`<button class="mobile-card-action" type="button" data-detail="${escapeHtml(step.detail)}">Detail</button>`:''}
+                ${step.panel?`<button class="mobile-card-action secondary" type="button" data-panel="${escapeHtml(step.panel)}">Buka Flow</button>`:''}
+              </div>
+            `:''}
+          </div>
+        </div>
+      </article>
+    `).join('')}
+  `;
+}
+
 function det(id){
   const D=DETS[id]; if(!D)return;
   document.getElementById('fd-t').textContent=D.title;
@@ -951,6 +1131,31 @@ const DETS={
     {cl:'b',lbl:'USD',t:'Via OCBC USD',b:'Journal: JBSP-PUR-IMPORT. Kurs API harian. FX Realized akun 71001.',c:'account.payment USD'}
   ]}
 };
+
+document.getElementById('mobileCards')?.addEventListener('click',(event)=>{
+  const detailButton=event.target.closest('[data-detail]');
+  if(detailButton){
+    det(detailButton.dataset.detail);
+    return;
+  }
+  const panelButton=event.target.closest('[data-panel]');
+  if(panelButton){
+    go(panelButton.dataset.panel);
+  }
+});
+
+let lastMobileLayout=isMobileLayout();
+function syncResponsiveMode(){
+  const isMobile=isMobileLayout();
+  if(isMobile!==lastMobileLayout){
+    lastMobileLayout=isMobile;
+    setMobileViewMode(isMobile?'cards':'diagram');
+  }
+}
+
+renderMobileCards(activePanel);
+setMobileViewMode(lastMobileLayout?'cards':'diagram');
+window.addEventListener('resize',syncResponsiveMode);
 </script>
 </body>
 </html>
