@@ -30,8 +30,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
 .header-title{font-size:15px;font-weight:500;color:var(--text)}
 .header-sub{font-size:12px;color:var(--dim);margin-left:auto}
 .header-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-.view-toggle{display:flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:3px}
-.view-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted);background:none;border:none;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.view-toggle{display:flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:3px;overflow-x:auto}
+.view-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted);background:none;border:none;cursor:pointer;transition:all .2s;font-family:var(--font);white-space:nowrap}
 .view-btn.active{background:var(--white);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1)}
 
 /* ACTOR SELECTOR */
@@ -163,12 +163,26 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
 .pdf-cat-title{font-size:16px;font-weight:700;margin-top:28px;margin-bottom:12px;color:var(--text)}
 .pdf-cat-title:first-child{margin-top:0}
 
+/* FLOWCHART VIEW */
+.flowchart-view{display:none;padding:20px 24px 28px}
+.flowchart-view.active{display:block}
+.flowchart-shell{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.07)}
+.flowchart-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-bottom:1px solid var(--border)}
+.flowchart-head h2{font-size:18px;font-weight:700;color:var(--text)}
+.flowchart-head p{font-size:13px;color:var(--muted);margin-top:3px}
+.flowchart-open{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:7px;background:var(--text);color:var(--white);font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}
+.flowchart-open:hover{opacity:.9}
+.flowchart-frame{display:block;width:100%;height:calc(100vh - 145px);min-height:680px;border:0;background:#13100C}
+
 /* HIDDEN */
 .hidden{display:none}
 
 /* RESPONSIVE */
 @media(max-width:640px){
-  .header{padding:0 16px;gap:12px}
+  .header{height:auto;align-items:flex-start;padding:12px 16px;gap:8px}
+  .header-right{width:100%;margin-left:0;align-items:flex-start;flex-direction:column;gap:8px}
+  .view-toggle{width:100%}
+  .view-btn{flex:1}
   .actor-bar{padding:0 16px}
   .actor-tab{padding:12px 14px;font-size:12px;gap:8px}
   .actor-icon{width:28px;height:28px;font-size:12px}
@@ -180,6 +194,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
   .flow-visual{flex-direction:column;align-items:stretch}
   .flow-arrow{transform:rotate(90deg);text-align:center;padding:2px 0}
   .flow-box{width:100%}
+  .flowchart-view{padding:16px}
+  .flowchart-head{align-items:flex-start;flex-direction:column}
+  .flowchart-open{width:100%}
+  .flowchart-frame{height:calc(100vh - 190px);min-height:520px}
   .header-sub{display:none}
 }
 </style>
@@ -193,6 +211,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
     <div class="view-toggle">
       <button class="view-btn active" onclick="switchView('actor')" id="btn-actor">Per Aktor</button>
       <button class="view-btn" onclick="switchView('pdf')" id="btn-pdf">Semua PDF</button>
+      <button class="view-btn" onclick="switchView('flowchart')" id="btn-flowchart">Flowchart</button>
     </div>
     <div class="header-sub">PT Jaya Bersama Saputra Perkasa &middot; Odoo 19</div>
   </div>
@@ -1203,6 +1222,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15
   </div>
 </div>
 
+<!-- ═══════════════ FLOWCHART VIEW ═══════════════ -->
+<div id="view-flowchart" class="flowchart-view">
+  <div class="flowchart-shell">
+    <div class="flowchart-head">
+      <div>
+        <h2>Purchase Cross-Functional Flowchart</h2>
+        <p>Flow proses end-to-end purchase, approval, receipt, invoice, payment, dan import tracking.</p>
+      </div>
+      <a class="flowchart-open" href="Purchase_CrossFunctional_Flowchart.html" target="_blank" rel="noopener">Buka di Tab Baru</a>
+    </div>
+    <iframe
+      class="flowchart-frame"
+      src="Purchase_CrossFunctional_Flowchart.html"
+      title="Purchase Cross-Functional Flowchart"
+    ></iframe>
+  </div>
+</div>
+
 <script>
 function showActor(id){
   const actors = ['requestor','prmanager','finance','purchasing','inbound','finance2'];
@@ -1223,20 +1260,18 @@ function toggleStep(card){
 function switchView(view){
   const actorView = document.getElementById('view-actor');
   const pdfView = document.getElementById('view-pdf');
+  const flowchartView = document.getElementById('view-flowchart');
   const btnActor = document.getElementById('btn-actor');
   const btnPdf = document.getElementById('btn-pdf');
+  const btnFlowchart = document.getElementById('btn-flowchart');
 
-  if(view === 'actor'){
-    actorView.style.display = 'block';
-    pdfView.classList.remove('active');
-    btnActor.classList.add('active');
-    btnPdf.classList.remove('active');
-  } else {
-    actorView.style.display = 'none';
-    pdfView.classList.add('active');
-    btnPdf.classList.add('active');
-    btnActor.classList.remove('active');
-  }
+  actorView.style.display = view === 'actor' ? 'block' : 'none';
+  pdfView.classList.toggle('active', view === 'pdf');
+  flowchartView.classList.toggle('active', view === 'flowchart');
+
+  btnActor.classList.toggle('active', view === 'actor');
+  btnPdf.classList.toggle('active', view === 'pdf');
+  btnFlowchart.classList.toggle('active', view === 'flowchart');
 }
 
 showActor('requestor');
